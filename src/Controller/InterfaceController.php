@@ -30,17 +30,17 @@ class InterfaceController extends AbstractController
      */
     //création d'un client ds la bdd
     public function create(EntityManagerInterface $em, Request $request){
+
         $client = new Client();
         $client->setCreatedAt(new \DateTime('now'));
         $form = $this->createForm(ClientType::class,$client);
         $form->handleRequest($request);
-        
-
-        if($form->isSubmitted() && $form->isValid()){
-            $em->persist($client);
-            $em->flush();
-        return $this->redirectToRoute('interface');
-        }
+    
+            if($form->isSubmitted() && $form->isValid()){
+                $em->persist($client);
+                $em->flush();
+            return $this->redirectToRoute('interface');
+            }
 
         return $this->render('create.html.twig',[
             'form'=>$form->createView()
