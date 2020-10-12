@@ -26,7 +26,7 @@ class InterfaceController extends AbstractController
 
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/interface/create", name="create")
      */
     //création d'un client ds la bdd
     public function create(EntityManagerInterface $em, Request $request){
@@ -41,6 +41,7 @@ class InterfaceController extends AbstractController
             $em->flush();
         return $this->redirectToRoute('interface');
         }
+
         return $this->render('create.html.twig',[
             'form'=>$form->createView()
         ]);
@@ -74,6 +75,9 @@ class InterfaceController extends AbstractController
         $deleteClient = $em->getRepository(Client::class)->find($clientId);
         $em->remove($deleteClient);
         $em->flush();
+
+        return $this->redirectToRoute('interface');
     }
+
    
 }

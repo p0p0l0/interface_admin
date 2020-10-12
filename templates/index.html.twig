@@ -3,8 +3,15 @@
 {% block title %} Menu {% endblock %}
 
 {% block body %}
+    <div class="d-flex justify-content-end">
+        <a href=" {{path('create')}}"></a>
+            <button type="button" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Création d'un client
+            </button>   
+        </a>
+    </div>
 
-    <table class="table">
+    <table class="table mt-2">
         <thead>
             <tr>
                 <th scope="col">id</th>
