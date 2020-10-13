@@ -19,7 +19,7 @@ class InterfaceController extends AbstractController
     {
 
         $clients= $em->getRepository(Client::class)->findAll();
-        return $this->render('index.html.twig',[
+        return $this->render('interface/index.html.twig',[
             'clients' =>$clients
         ]);
     }
@@ -42,7 +42,7 @@ class InterfaceController extends AbstractController
             return $this->redirectToRoute('interface');
             }
 
-        return $this->render('create.html.twig',[
+        return $this->render('interface/create.html.twig',[
             'form'=>$form->createView()
         ]);
     }
@@ -50,6 +50,7 @@ class InterfaceController extends AbstractController
     /**
      * @Route("/interface/edit/{clientId}", name="edit", requirements={"clientId"= "\d+"})
      */
+    //mise a jour d'un client par rapport a son id en passant par le formulaire de creation
     public function edit(EntityManagerInterface $em, Request $request, $clientId ){
 
         $client = $em->getRepository(Client::class)->find($clientId);
@@ -61,7 +62,7 @@ class InterfaceController extends AbstractController
                 return $this->redirectToRoute('interface');
             }
 
-        return $this->render('create.html.twig',[
+        return $this->render('interface/create.html.twig',[
             'form'=>$form->createView()
         ]);
 
@@ -70,6 +71,7 @@ class InterfaceController extends AbstractController
     /**
      * @Route("/interface/delete/{clientId}", name="delete", requirements={"clientId"= "\d+"})
      */
+    //supprime un client par rapport a son id
     public function delete(EntityManagerInterface $em, $clientId){
         
         $deleteClient = $em->getRepository(Client::class)->find($clientId);
