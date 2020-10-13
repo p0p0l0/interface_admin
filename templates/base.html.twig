@@ -13,8 +13,18 @@
     <body>
         <div class="container">
             <div class="row mt-5">
-                {% block body %}
-                {% endblock %}
+                {% if app.user %}
+                    <div class="col-2">
+                        <a href="{{ path('security_logout') }}" class="btn btn-secondary">Deconnexion</a>
+                    </div>
+                    {% block body %}
+                    {% endblock %}
+                {% else %}
+                    <div class="text-center">
+                        <h2>Merci de bien vouloir vous connecter</h2>
+                        <a href=" {{path('security_login')}}" class="btn btn-primary"> Connexion </a>
+                    </div>
+                    {% endif %}
             </div>
         </div>
         {% block javascripts %}

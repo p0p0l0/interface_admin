@@ -22,7 +22,8 @@ security:
             form_login:
                 login_path: security_login
                 check_path: security_login  
-
+                #page ou l'utilisateur sera redirigé après identification
+                default_target_path: interface 
             logout:
                 path: security_logout
                 target: security_login
