@@ -26,7 +26,7 @@ class InterfaceController extends AbstractController
 
 
     /**
-     * @Route("/interface/create", name="create")
+     * @Route("/interface/create", name="interface_create")
      */
     //création d'un client ds la bdd
     public function create(EntityManagerInterface $em, Request $request){
@@ -48,7 +48,7 @@ class InterfaceController extends AbstractController
     }
 
     /**
-     * @Route("/interface/edit/{clientId}", name="edit", requirements={"clientId"= "\d+"})
+     * @Route("/interface/edit/{clientId}", name="interface_edit", requirements={"clientId"= "\d+"})
      */
     //mise a jour d'un client par rapport a son id en passant par le formulaire de creation
     public function edit(EntityManagerInterface $em, Request $request, $clientId ){
@@ -69,7 +69,7 @@ class InterfaceController extends AbstractController
     }
 
     /**
-     * @Route("/interface/delete/{clientId}", name="delete", requirements={"clientId"= "\d+"})
+     * @Route("/interface/delete/{clientId}", name="interface_delete", requirements={"clientId"= "\d+"})
      */
     //supprime un client par rapport a son id
     public function delete(EntityManagerInterface $em, $clientId){

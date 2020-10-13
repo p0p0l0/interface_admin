@@ -2,8 +2,14 @@
 
 {% block body %}
 
+<div>
+    <a href=" {{path('interface')}}">
+        <button type="button" class="btn btn-primary"> Retour à la liste</button>
+    </a>
+</div>
+<div class="row mt-5">
 {{ form_start(form)}}
 
 {{ form_end(form)}}
-
+</div>
 {% endblock %}

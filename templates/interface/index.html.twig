@@ -3,8 +3,8 @@
 {% block title %} Menu {% endblock %}
 
 {% block body %}
-    <div>
-        <a href="{{ path('create') }}">
+    <div >
+        <a href="{{ path('interface_create') }}">
             <button type="button" class="btn btn-primary">
                 <i class="fa fa-plus"></i> Création d'un client
             </button>   
@@ -31,13 +31,13 @@
                 <td>{{ client.mail }}</td>
                 <td>{{ client.createdAt | date('d/m/Y')}}</td>
                 <td>    
-                    <a href="{{ path('edit',{'clientId': client.id}) }}">
+                    <a href="{{ path('interface_edit',{'clientId': client.id}) }}">
                         <button type="button" class="btn btn-primary">
                             <i class="fa fa-edit"></i>
                         </button>   
                     </a>
                     &nbsp;
-                    <a href="{{ path('delete', {'clientId' : client.id}) }}">
+                    <a href="{{ path('interface_delete', {'clientId' : client.id}) }}">
                         <button type="button" class="btn btn-outline-danger">
                             <i class="fa fa-minus"></i>
                         </button>
