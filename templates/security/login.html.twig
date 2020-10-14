@@ -12,8 +12,13 @@
     </head>
     <body>
         <div class="container">
-            <div class="row mt-5">
                     {% block body %}
+
+                        {% if error %}
+                            <div class="alert alert-danger">
+                                {{ error.messageKey | trans(error.messagedata,'security')}}
+                            </div>
+                        {% endif %}
                         <form action="{{ path('security_login') }}" method = "post">
                             <div class="form-group">
                                 <label for = "username">Pseudo</label>
@@ -28,7 +33,6 @@
                             </div>
                         </form>
                     {% endblock %}
-            </div>
         </div>
         {% block javascripts %}
             {# bootstrap #}

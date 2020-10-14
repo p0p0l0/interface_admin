@@ -23,8 +23,9 @@ class Client
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     * min =2,
-     * minMessage = "Le nom du client doit faire aun minimum 2 caractères
+     *      min = 2,
+     *      minMessage = "Le nom doit etre au minimum de {{ limit }} caractères",
+     *      allowEmptyString = false
      * )
      */
     private $name;
