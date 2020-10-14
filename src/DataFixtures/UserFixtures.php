@@ -24,15 +24,15 @@ class UserFixtures extends Fixture
                              'testtest'
                          ));
         $manager->persist($user);
-        $manager->flush();
+        
 
         $admin = new User();
-        $user->setUsername('admin')
+        $admin->setUsername('admin')
              ->setPassword($this->passwordEncoder->encodePassword(
-                             $user,
+                             $admin,
                              'admin'
                          ));
-        $manager->persist($user);
+        $manager->persist($admin);
         $manager->flush();
 
     }

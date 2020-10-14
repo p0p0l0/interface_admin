@@ -9,14 +9,14 @@
 
     <div class="mt-3">
         {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    <i class= "fa fa-check"></i><span class= "ml-3">{{message}}</span>
-                </div>
-                {% endfor %}
+            <div class="alert alert-success">
+                <i class= "fa fa-check"></i><span class= "ml-3">{{message}}</span>
+            </div>
+        {% endfor %}
     </div>
     
-    <div>
-        <a href="{{ path('interface_create') }}">
+    <div> 
+        <a href="{{path('interface_create',{'userId' : user.id})}}">
             <button type="button" class="btn btn-primary">
                 <i class="fa fa-plus"></i> Création d'un client
             </button>   
@@ -43,18 +43,18 @@
                 <td>{{ client.mail }}</td>
                 <td>{{ client.createdAt | date('d/m/Y')}}</td>
                 <td>    
-                    <a href="{{ path('interface_edit',{'clientId': client.id}) }}">
+                    <a href="">
                         <button type="button" class="btn btn-primary">
                             <i class="fa fa-edit"></i>
                         </button>   
                     </a>
                     &nbsp;
-                    <a href="{{ path('interface_delete', {'clientId' : client.id}) }}">
+                    <a href="">
                         <button type="button" class="btn btn-outline-danger">
                             <i class="fa fa-minus"></i>
                         </button>
                     </a>
-                </td>
+                </td>#}
             </tr>
             {% endfor %}
         </tbody>

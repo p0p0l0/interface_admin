@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ClientRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -39,6 +41,18 @@ class Client
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="client")
+     */
+    private $websites;
+
+
+    public function __construct()
+    {
+        $this->websites = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -80,4 +94,5 @@ class Client
 
         return $this;
     }
-}
+
+    }

@@ -15,12 +15,12 @@
             {% if app.user %}
                 <div class="row mt-5">                    
                     <nav class="navbar navbar-light bg-light">
-                        <a class="navbar-brand" href="#">Menu</a>
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a href="{{ path('security_logout') }}">Deconnexion</a> 
-                            </li>
-                        </ul>
+                        <a class="navbar-brand" href="#">{{ user.username }}</a>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a href="{{ path('security_logout') }}">Deconnexion</a> 
+                                </li>
+                            </ul>
                     </nav>
                 </div>
                     {% block body %}

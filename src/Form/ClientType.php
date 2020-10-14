@@ -23,7 +23,7 @@ class ClientType extends AbstractType
                 'label'=>'Email'
             ])
             ->add('createdAt',DateTimeType::class,[
-                'label'=>'Date d\'enregistrement'
+                'label'=>'Date de creation'
             ])
             ->add('valider',SubmitType::class)
         ;
