@@ -33,12 +33,18 @@ class InterfaceController extends AbstractController
 
         $client = new Client();
         $client->setCreatedAt(new \DateTime('now'));
+
         $form = $this->createForm(ClientType::class,$client);
         $form->handleRequest($request);
+        $name = $client->getName();
     
             if($form->isSubmitted() && $form->isValid()){
                 $em->persist($client);
                 $em->flush();
+
+                $this->addFlash(
+                    "success","Le client $name a été ajouté avec succès"
+                );
             return $this->redirectToRoute('interface');
             }
 
@@ -54,10 +60,19 @@ class InterfaceController extends AbstractController
     public function edit(EntityManagerInterface $em, Request $request, $clientId ){
 
         $client = $em->getRepository(Client::class)->find($clientId);
+
         $form = $this->createForm(ClientType::class,$client);
         $form->handleRequest($request);
+
+        $name = $client->getName();
+
             if($form->isSubmitted() && $form->isValid()){
                 $em->flush();
+
+                
+                $this->addFlash(
+                    "success","Le client $name a été édité avec succès"
+                );
 
                 return $this->redirectToRoute('interface');
             }
@@ -75,8 +90,15 @@ class InterfaceController extends AbstractController
     public function delete(EntityManagerInterface $em, $clientId){
         
         $deleteClient = $em->getRepository(Client::class)->find($clientId);
+        
+        $name = $deleteClient->getName();
+
         $em->remove($deleteClient);
         $em->flush();
+        
+        $this->addFlash(
+            "success","Le client $name a été supprimé avec succès"
+        );
 
         return $this->redirectToRoute('interface');
     }

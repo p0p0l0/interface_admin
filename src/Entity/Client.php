@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ClientRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @UniqueEntity("name")
  */
 class Client
 {
@@ -19,6 +22,10 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     * min =2,
+     * minMessage = "Le nom du client doit faire aun minimum 2 caractères
+     * )
      */
     private $name;
 

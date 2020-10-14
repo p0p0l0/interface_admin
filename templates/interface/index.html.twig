@@ -3,6 +3,18 @@
 {% block title %} Interface {% endblock %}
 
 {% block body %}
+    <div class="row d-flex justify-content-center">
+        <h2> Liste des clients</h2>
+    </div>
+
+    <div class="mt-3">
+        {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    <i class= "fa fa-check"></i><span class= "ml-3">{{message}}</span>
+                </div>
+                {% endfor %}
+    </div>
+    
     <div>
         <a href="{{ path('interface_create') }}">
             <button type="button" class="btn btn-primary">

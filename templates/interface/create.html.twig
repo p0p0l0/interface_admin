@@ -3,15 +3,18 @@
 {% block title %}Création/Edition Client{% endblock %}
 
 {% block body %}
+    <div class="row d-flex justify-content-center">
+        <h2>Création/Modification du client</h2>
+    </div>
+   
+    <div class= "col-2">
+        <a href=" {{path('interface')}}">
+            <button type="button" class="btn btn-primary">Retour à la liste</button>
+        </a>
+    </div>
 
-<div class= "col-2">
-    <a href=" {{path('interface')}}">
-        <button type="button" class="btn btn-primary">Retour à la liste</button>
-    </a>
-</div>
-<div class="col-10">
-{{ form_start(form)}}
-
-{{ form_end(form)}}
-</div>
+    <div class="col-10">
+        {{ form_start(form)}}
+        {{ form_end(form)}}
+    </div>
 {% endblock %}
