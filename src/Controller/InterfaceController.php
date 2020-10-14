@@ -52,7 +52,10 @@ class InterfaceController extends AbstractController
                 $this->addFlash(
                     "success","Le client $name a été ajouté avec succès"
                 );
-            return $this->redirectToRoute('interface_list');
+
+            return $this->redirectToRoute('interface_list',[
+                'userId'=>$userId
+            ]);
             }
 
         return $this->render('interface/create.html.twig',[
@@ -64,10 +67,10 @@ class InterfaceController extends AbstractController
      * @Route("/edit/{clientId}", name="edit", requirements={"clientId"= "\d+"})
      */
     //mise a jour d'un client par rapport a son id en passant par le formulaire de creation
-    public function edit(EntityManagerInterface $em, Request $request, $clientId ){
+    public function edit(EntityManagerInterface $em, Request $request, $userId, $clientId ){
 
         $client = $em->getRepository(Client::class)->find($clientId);
-
+        $user = $em->getRepository(User::class)->find($userId);
         $form = $this->createForm(ClientType::class,$client);
         $form->handleRequest($request);
 
@@ -81,11 +84,14 @@ class InterfaceController extends AbstractController
                     "success","Le client $name a été édité avec succès"
                 );
 
-                return $this->redirectToRoute('interface_list');
+                return $this->redirectToRoute('interface_list',[
+                    'userId'=>$userId
+                ]);
             }
 
         return $this->render('interface/create.html.twig',[
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'user'=>$user
         ]);
 
     }
@@ -94,7 +100,7 @@ class InterfaceController extends AbstractController
      * @Route("/delete/{clientId}", name="delete", requirements={"clientId"= "\d+"})
      */
     //supprime un client par rapport a son id
-    public function delete(EntityManagerInterface $em, $clientId){
+    public function delete(EntityManagerInterface $em, $userId, $clientId){
         
         $deleteClient = $em->getRepository(Client::class)->find($clientId);
 
@@ -107,7 +113,9 @@ class InterfaceController extends AbstractController
             "success","Le client $name a été supprimé avec succès"
         );
 
-        return $this->redirectToRoute('interface_list');
+        return $this->redirectToRoute('interface_list',[
+            'userId'=>$userId
+        ]);
     }
    
 }
