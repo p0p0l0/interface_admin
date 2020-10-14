@@ -25,11 +25,6 @@
                 </div>
                     {% block body %}
                     {% endblock %}
-            {% else %}
-                <div class="text-center">
-                    <h2>Merci de bien vouloir vous connecter</h2>
-                    <a href=" {{path('security_login')}}" class="btn btn-primary"> Connexion </a>
-                </div>
             {% endif %}
         </div>
         {% block javascripts %}

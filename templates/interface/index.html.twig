@@ -25,11 +25,14 @@
 
     <table class="table mt-2">
         <thead>
-            <tr>
-                <th scope="col">id</th>
+            <tr>    
                 <th scope="col">Nom</th>
                 <th scope="col">Mail</th>
-                <th scope="col">Date</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">UserCreation</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">User Edit</th>
+                <th scope="col">Date de Modification</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -38,10 +41,13 @@
             {# Boucle liste des clients #}
             {% for client in clients %}
             <tr>
-                <td>{{ client.id }}</td>
-                <td>{{ client.name }}</td>
+                <td> <a href="">{{ client.name }}</a></td>
                 <td>{{ client.mail }}</td>
-                <td>{{ client.createdAt | date('d/m/Y')}}</td>
+                <td>{{ client.telephone }}</td>
+                <td>{{ client.userCreation }}</td>
+                <td>{{ client.createdAt | date('d/m/Y h:i')}}</td>
+                <td>{{ client.userEdit }}</td>
+                <td>{{ client.editAt | date('d/m/Y h:i')}}</td>
                 <td>    
                     <a href="{{ path('interface_edit',{'userId' : user.id, 'clientId': client.id}) }}">
                         <button type="button" class="btn btn-primary">

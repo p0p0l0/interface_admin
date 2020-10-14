@@ -36,9 +36,12 @@ class InterfaceController extends AbstractController
     public function create(EntityManagerInterface $em, Request $request, $userId){
         
         $client = new Client();
-        $client->setCreatedAt(new \DateTime('now'));
-
+    
         $user = $em->getRepository(User::class)->find($userId);
+
+        $client->setCreatedAt(new \DateTime())
+               ->setUserCreation($user->getUsername());
+                
 
         $form = $this->createForm(ClientType::class,$client);
         $form->handleRequest($request);
@@ -71,6 +74,10 @@ class InterfaceController extends AbstractController
 
         $client = $em->getRepository(Client::class)->find($clientId);
         $user = $em->getRepository(User::class)->find($userId);
+
+        $client->setEditAt(new \Datetime())
+               ->setUserEdit($user->getUsername());
+               
         $form = $this->createForm(ClientType::class,$client);
         $form->handleRequest($request);
 
