@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Client;
+use App\Entity\Website;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +21,7 @@ class WebsiteController extends AbstractController
     {
         $client = $em->getRepository(Client::class)->find($clientId);
         $user = $em->getRepository(User::class)->find($userId);
+        $websites = $em->getRepository(Website::class)->findAll();
         return $this->render('website/index.html.twig',[
             'user'=>$user,
             'client'=>$client

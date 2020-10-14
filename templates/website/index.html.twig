@@ -3,6 +3,14 @@
 {% block title %}Hello WebsiteController!{% endblock %}
 
 {% block body %}
-Ici la liste des sites
-
+    <div class="row d-flex justify-content-center">
+        <h2> {{ client.name }} </h2>
+    </div>
+    <div class="mt-3">
+        {% if client.websites|length %}
+            blabla
+        {% else %}
+          <h5>Pas de site web pour l'instant</h5>
+        {% endif %}
+    </div>
 {% endblock %}
