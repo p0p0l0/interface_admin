@@ -2,18 +2,27 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Entity\Client;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Route("/{userId}/{clientId}", name="website_", requirements = {"userId" = "\d+", "clientId" = "\d+"})
+ */
 class WebsiteController extends AbstractController
 {
     /**
-     * @Route("/website", name="website")
+     * @Route("/website", name="list")
      */
-    public function index()
+    public function index(EntityManagerInterface $em, $userId,$clientId)
     {
-        return $this->render('website/index.html.twig', [
-            'controller_name' => 'WebsiteController',
+        $client = $em->getRepository(Client::class)->find($clientId);
+        $user = $em->getRepository(User::class)->find($userId);
+        return $this->render('website/index.html.twig',[
+            'user'=>$user,
+            'client'=>$client
         ]);
     }
 }

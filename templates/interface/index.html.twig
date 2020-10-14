@@ -22,7 +22,8 @@
             </button>   
         </a>
     </div>
-
+ 
+    
     <table class="table mt-2">
         <thead>
             <tr>    
@@ -38,30 +39,30 @@
         </thead>
 
         <tbody>
-            {# Boucle liste des clients #}
+            
             {% for client in clients %}
-            <tr>
-                <td> <a href="">{{ client.name }}</a></td>
-                <td>{{ client.mail }}</td>
-                <td>{{ client.telephone }}</td>
-                <td>{{ client.userCreation }}</td>
-                <td>{{ client.createdAt | date('d/m/Y h:i')}}</td>
-                <td>{{ client.userEdit }}</td>
-                <td>{{ client.editAt | date('d/m/Y h:i')}}</td>
-                <td>    
-                    <a href="{{ path('interface_edit',{'userId' : user.id, 'clientId': client.id}) }}">
-                        <button type="button" class="btn btn-primary">
-                            <i class="fa fa-edit"></i>
-                        </button>   
-                    </a>
-                    &nbsp;
-                    <a href="{{ path('interface_delete',{'userId' : user.id, 'clientId' : client.id}) }}">
-                        <button type="button" class="btn btn-outline-danger">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
+                <tr>
+                    <td> <a href="{{path('website_list',{'userId' : user.id, 'clientId':client.id})}}">{{ client.name }}</a></td>
+                    <td>{{ client.mail }}</td>
+                    <td>{{ client.telephone }}</td>
+                    <td>{{ client.userCreation }}</td>
+                    <td>{{ client.createdAt | date('d/m/Y h:i')}}</td>
+                    <td>{{ client.userEdit }}</td>
+                    <td>{{ client.editAt | date('d/m/Y h:i')}}</td>
+                    <td>    
+                        <a href="{{ path('interface_edit',{'userId' : user.id, 'clientId': client.id}) }}">
+                            <button type="button" class="btn btn-primary">
+                                <i class="fa fa-edit"></i>
+                            </button>   
+                        </a>
+                        &nbsp;
+                        <a href="{{ path('interface_delete',{'userId' : user.id, 'clientId' : client.id}) }}">
+                            <button type="button" class="btn btn-outline-danger">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
