@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 /**
  * @Route("/{userId}", name = "interface_", requirements = {"userId" = "\d+"})
@@ -67,10 +68,10 @@ class InterfaceController extends AbstractController
         ]);
     }
     /**
-     * @Route("/edit/{clientId}", name="edit", requirements={"clientId"= "\d+"})
+     * @Route("/{clientId}/edit", name="edit", requirements={"clientId"= "\d+"})
      */
     //mise a jour d'un client par rapport a son id en passant par le formulaire de creation
-    public function edit(EntityManagerInterface $em, Request $request, $userId, $clientId ){
+    public function edit(EntityManagerInterface $em, Request $request, $userId, $clientId ){ 
 
         $client = $em->getRepository(Client::class)->find($clientId);
         $user = $em->getRepository(User::class)->find($userId);
@@ -85,7 +86,6 @@ class InterfaceController extends AbstractController
 
             if($form->isSubmitted() && $form->isValid()){
                 $em->flush();
-
                 
                 $this->addFlash(
                     "success","Le client $name a été édité avec succès"
@@ -104,7 +104,7 @@ class InterfaceController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{clientId}", name="delete", requirements={"clientId"= "\d+"})
+     * @Route("/{clientId}/delete", name="delete", requirements={"clientId"= "\d+"})
      */
     //supprime un client par rapport a son id
     public function delete(EntityManagerInterface $em, $userId, $clientId){
@@ -113,16 +113,24 @@ class InterfaceController extends AbstractController
 
         $name = $deleteClient->getName();
 
-        $em->remove($deleteClient);
-        $em->flush();
-        
-        $this->addFlash(
-            "success","Le client $name a été supprimé avec succès"
-        );
+        try{
+            $em->remove($deleteClient);
+            $em->flush();
+            
+            $this->addFlash(
+                "success","Le client $name a été supprimé avec succès"
+            );
+            return $this->redirectToRoute('interface_list',[
+                'userId'=>$userId
+            ]);
+        }catch(ForeignKeyConstraintViolationException $e){
 
-        return $this->redirectToRoute('interface_list',[
-            'userId'=>$userId
-        ]);
+            $this->addFlash(
+                "warning","Le client ne peut etre supprimé. Il possède toujours des sites web"
+            );
+
+            
+        }
     }
    
 }

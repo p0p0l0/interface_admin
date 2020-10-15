@@ -13,6 +13,12 @@
                 <i class= "fa fa-check"></i><span class= "ml-3">{{message}}</span>
             </div>
         {% endfor %}
+        
+        {% for message in app.flashes('warning') %}
+        <div class="alert alert-danger">
+            <i class= "far fa-edit"></i><span class= "ml-3">{{message}}</span>
+        </div>
+        {% endfor %}
     </div>
     
     <div> 
@@ -46,9 +52,9 @@
                     <td>{{ client.mail }}</td>
                     <td>{{ client.telephone }}</td>
                     <td>{{ client.userCreation }}</td>
-                    <td>{{ client.createdAt | date('d/m/Y h:i')}}</td>
+                    <td>{{ client.createdAt | date('d/m/Y H:i', 'Europe/Paris')}}</td>
                     <td>{{ client.userEdit }}</td>
-                    <td>{{ client.editAt | date('d/m/Y h:i')}}</td>
+                    <td>{{ client.editAt | date('d/m/Y H:i','Europe/Paris')}}</td>
                     <td>    
                         <a href="{{ path('interface_edit',{'userId' : user.id, 'clientId': client.id}) }}">
                             <button type="button" class="btn btn-primary">
