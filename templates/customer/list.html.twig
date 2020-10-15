@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row d-flex justify-content-center">
-        <h2> Liste des clients</h2>
+        <h2> Liste des customers</h2>
     </div>
 
     <div class="mt-3">
@@ -22,9 +22,9 @@
     </div>
     
     <div> 
-        <a href="{{path('interface_create',{'userId' : user.id})}}">
+        <a href="{{path('customer_create',{'userId' : user.id})}}">
             <button type="button" class="btn btn-primary">
-                <i class="fa fa-plus"></i> Création d'un client
+                <i class="fa fa-plus"></i> Création d'un customer
             </button>   
         </a>
     </div>
@@ -46,23 +46,23 @@
 
         <tbody>
             
-            {% for client in clients %}
+            {% for customer in customers %}
                 <tr>
-                    <td> <a href="{{path('website_list',{'userId' : user.id, 'clientId':client.id})}}">{{ client.name }}</a></td>
-                    <td>{{ client.mail }}</td>
-                    <td>{{ client.telephone }}</td>
-                    <td>{{ client.userCreation }}</td>
-                    <td>{{ client.createdAt | date('d/m/Y H:i', 'Europe/Paris')}}</td>
-                    <td>{{ client.userEdit }}</td>
-                    <td>{{ client.editAt | date('d/m/Y H:i','Europe/Paris')}}</td>
+                    <td> <a href="{{path('website_list',{'userId' : user.id, 'customerId':customer.id})}}">{{ customer.name }}</a></td>
+                    <td>{{ customer.mail }}</td>
+                    <td>{{ customer.telephone }}</td>
+                    <td>{{ customer.userCreation }}</td>
+                    <td>{{ customer.createdAt | date('d/m/Y H:i', 'Europe/Paris')}}</td>
+                    <td>{{ customer.userEdit }}</td>
+                    <td>{{ customer.editAt | date('d/m/Y H:i','Europe/Paris')}}</td>
                     <td>    
-                        <a href="{{ path('interface_edit',{'userId' : user.id, 'clientId': client.id}) }}">
+                        <a href="{{ path('customer_edit',{'userId' : user.id, 'customerId': customer.id}) }}">
                             <button type="button" class="btn btn-primary">
                                 <i class="fa fa-edit"></i>
                             </button>   
                         </a>
                         &nbsp;
-                        <a href="{{ path('interface_delete',{'userId' : user.id, 'clientId' : client.id}) }}">
+                        <a href="{{ path('customer_delete',{'userId' : user.id, 'customerId' : customer.id}) }}">
                             <button type="button" class="btn btn-outline-danger">
                                 <i class="fa fa-minus"></i>
                             </button>

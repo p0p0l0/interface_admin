@@ -47,9 +47,10 @@ class Website
     private $pathFolder;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="websites")
+     * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="websites")
      */
-    private $client;
+    private $customer;
+
 
     public function getId(): ?int
     {
@@ -116,17 +117,18 @@ class Website
         return $this;
     }
 
-    public function getClient(): ?Client
+    public function getCustomer(): ?Customer
     {
-        return $this->client;
+        return $this->customer;
     }
 
-    public function setClient(?Client $client): self
+    public function setCustomer(?Customer $customer): self
     {
-        $this->client = $client;
+        $this->customer = $customer;
 
         return $this;
     }
+
 
 
 }

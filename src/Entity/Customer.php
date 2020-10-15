@@ -2,18 +2,15 @@
 
 namespace App\Entity;
 
+use App\Repository\CustomerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ClientRepository;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ClientRepository::class)
- * @UniqueEntity("name")
+ * @ORM\Entity(repositoryClass=CustomerRepository::class)
  */
-class Client
+class Customer
 {
     /**
      * @ORM\Id
@@ -24,11 +21,6 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *      min = 2,
-     *      minMessage = "Le nom doit etre au minimum de {{ limit }} caractères",
-     *      allowEmptyString = false
-     * )
      */
     private $name;
 
@@ -36,6 +28,11 @@ class Client
      * @ORM\Column(type="string", length=255)
      */
     private $mail;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phone;
 
     /**
      * @ORM\Column(type="datetime")
@@ -48,14 +45,9 @@ class Client
     private $userCreation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="client")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $websites;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $telephone;
+    private $editAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -63,15 +55,14 @@ class Client
     private $userEdit;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="customer")
      */
-    private $editAt;
+    private $websites;
 
     public function __construct()
     {
         $this->websites = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -102,6 +93,18 @@ class Client
         return $this;
     }
 
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -110,18 +113,6 @@ class Client
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(string $telephone): self
-    {
-        $this->telephone = $telephone;
 
         return $this;
     }
@@ -138,26 +129,26 @@ class Client
         return $this;
     }
 
-    public function getUserEdit(): ?string
-    {
-        return $this->userEdit;
-    }
-
-    public function setUserEdit(string $userEdit): self
-    {
-        $this->userEdit = $userEdit;
-
-        return $this;
-    }
-
     public function getEditAt(): ?\DateTimeInterface
     {
         return $this->editAt;
     }
 
-    public function setEditAt(\DateTimeInterface $editAt): self
+    public function setEditAt(?\DateTimeInterface $editAt): self
     {
         $this->editAt = $editAt;
+
+        return $this;
+    }
+
+    public function getUserEdit(): ?string
+    {
+        return $this->userEdit;
+    }
+
+    public function setUserEdit(?string $userEdit): self
+    {
+        $this->userEdit = $userEdit;
 
         return $this;
     }
@@ -174,7 +165,7 @@ class Client
     {
         if (!$this->websites->contains($website)) {
             $this->websites[] = $website;
-            $website->setClient($this);
+            $website->setCustomer($this);
         }
 
         return $this;
@@ -185,14 +176,11 @@ class Client
         if ($this->websites->contains($website)) {
             $this->websites->removeElement($website);
             // set the owning side to null (unless already changed)
-            if ($website->getClient() === $this) {
-                $website->setClient(null);
+            if ($website->getCustomer() === $this) {
+                $website->setCustomer(null);
             }
         }
 
         return $this;
     }
-
-    
-
-    }
+}
