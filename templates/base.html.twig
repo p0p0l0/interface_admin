@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="container">
-            {% if app.user %}
+            {% if app.user.id == user.id %}
                 <div class="row mt-5">                    
                     <nav class="navbar navbar-light bg-light">
                         <a class="navbar-brand" href="#">{{ user.username }}</a>
@@ -25,7 +25,15 @@
                 </div>
                     {% block body %}
                     {% endblock %}
+                {% else %}
+                    <div class="d-flex justify-content-center">
+                        <h2>Merci de bien vouloir vous connectez</h2>
+                        <div>
+                            <a href="{{path('security_login') }}"><button class="btn btn-primary">Connexion</button></a>
+                        </div>
+                    </div>
             {% endif %}
+
         </div>
         {% block javascripts %}
             {# bootstrap #}
