@@ -23,9 +23,10 @@ class CustomerType extends AbstractType
                 'label'=>'E-Mail'
             ])
             ->add('phone',TelType::class,[
-                'label'=>'Telephone'
+                'label'=>'Telephone',
+                'required'=>false
             ])
-            ->add('submit',SubmitType::class)
+            ->add('Valider',SubmitType::class)
         ;
     }
 
