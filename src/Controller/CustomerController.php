@@ -55,7 +55,9 @@ class CustomerController extends AbstractController
                     "success","Le client {$customer->getName()} a été ajouté avec succès"
                 );
 
-            return $this->redirectToRoute('customer_list');
+            return $this->redirectToRoute('customer_update',[
+                'customerId'=>$customer->getId()    
+            ]);
             }
 
         return $this->render('customer/create.html.twig',[
@@ -84,7 +86,9 @@ class CustomerController extends AbstractController
                     "success","Le client {$customer->getName()} a été édité avec succès"
                 );
 
-                return $this->redirectToRoute('customer_list');
+                return $this->redirectToRoute('customer_update',[
+                    'customerId'=>$customerId
+                ]);
             }
 
         return $this->render('customer/update.html.twig',[
@@ -118,7 +122,7 @@ class CustomerController extends AbstractController
                 "warning","Le client ne peut etre supprimé. Il possède toujours des sites web"
             );
 
-            
+            return $this->redirectToRoute('customer_list'); 
         }
     }
    
