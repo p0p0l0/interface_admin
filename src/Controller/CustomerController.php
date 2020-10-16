@@ -31,7 +31,7 @@ class CustomerController extends AbstractController
             'user'=>$this->getUser()
         ]);
     }
-
+    
     /**
      * @Route("/create", name="create")
      */
@@ -95,6 +95,7 @@ class CustomerController extends AbstractController
 
         return $this->render('customer/create.html.twig',[
             'form'=>$form->createView(),
+            'customer'=>$customer,
             'user'=>$user
         ]);
 

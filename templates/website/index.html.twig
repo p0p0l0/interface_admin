@@ -7,6 +7,16 @@
         <h2> {{ customer.name }} </h2>
     </div>
 
+    <ul class="nav nav-tabs mb-2">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('customer_update',{'customerId':customer.id})}}">Info Client</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ path('website_list',{'customerId':customer.id})}}">Website</a>
+        </li>
+      </ul>
+
+
     <div class= "d-flex justify-content-between mt-5">
         <a href="{{path('website_create',{'customerId':customer.id})}}">
             <button type="button" class="btn btn-primary">
