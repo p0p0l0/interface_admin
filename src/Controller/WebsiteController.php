@@ -28,8 +28,7 @@ class WebsiteController extends AbstractController
 
         return $this->render('website/index.html.twig',[
             'websites'=>$websites,
-            'customer'=>$customer,
-            'user'=>$this->getUser()
+            'customer'=>$customer
         ]);
     }
 
@@ -39,10 +38,9 @@ class WebsiteController extends AbstractController
     public function create(EntityManagerInterface $em, CustomerRepository $cr, Request $request, $customerId ){
        
         $customer = $cr->find($customerId);
-        $user = $this->getUser(); 
 
         $customer->setEditAt(new \Datetime())
-                 ->setUserEdit($user->getUsername());
+                 ->setUserEdit($this->getUser()->getUsername());
                
         $website = new Website();
        
@@ -66,9 +64,7 @@ class WebsiteController extends AbstractController
 
         return $this->render('website/create.html.twig',[
             'form'=>$form->createView(),
-            'customer'=>$customer,
-            'user'=>$user
-
+            'customer'=>$customer
         ]);
     }
 
@@ -81,10 +77,9 @@ class WebsiteController extends AbstractController
         
         $website = $wr->find($websiteId);
         $customer = $cr->find($customerId);
-        $user = $this->getUser();
 
         $customer->setEditAt(new \DateTime())
-                 ->setUserEdit($user->getUsername());
+                 ->setUserEdit($this->getUser()->getUsername());
 
         $form = $this->createForm(WebsiteType::class,$website);
         $form->handleRequest($request);
@@ -103,7 +98,6 @@ class WebsiteController extends AbstractController
 
         return $this->render('website/create.html.twig',[
             'form'=>$form->createView(),
-            'user'=>$user,
             'customer'=>$customer
 
         ]);

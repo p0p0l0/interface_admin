@@ -6,6 +6,7 @@ use App\Entity\User;
 
 use App\Entity\Customer;
 use App\Form\CustomerType;
+use App\Repository\CustomerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,13 +23,12 @@ class CustomerController extends AbstractController
      * @Route("/list", name="list")
      */
     //Retourne la liste des customers presents ds la base
-    public function index(EntityManagerInterface $em)
+    public function index(EntityManagerInterface $em, CustomerRepository $cr)
     {     
-        $customers= $em->getRepository (Customer::class)->findAll();
+        $customers= $cr->findAll();
         
         return $this->render('customer/index.html.twig',[
-            'customers' =>$customers,
-            'user'=>$this->getUser()
+            'customers' =>$customers
         ]);
     }
     
@@ -39,45 +39,39 @@ class CustomerController extends AbstractController
     public function create(EntityManagerInterface $em, Request $request){
         
         $customer = new Customer();
-    
-        $user = $this->getUser();
 
         $customer->setCreatedAt(new \DateTime())
-                 ->setUserCreation($user->getUsername());
+                 ->setUserCreation($this->getUser()->getUsername());
                 
 
         $form = $this->createForm(CustomerType::class,$customer);
         $form->handleRequest($request);
-
-        $name = $customer->getName();
     
                 if($form->isSubmitted() && $form->isValid()){
                 $em->persist($customer);
                 $em->flush();
 
                 $this->addFlash(
-                    "success","Le customer $name a été ajouté avec succès"
+                    "success","Le client {$customer->getName()} a été ajouté avec succès"
                 );
 
             return $this->redirectToRoute('customer_list');
             }
 
         return $this->render('customer/create.html.twig',[
-            'form'=>$form->createView(),
-            'user'=>$user
+            'form'=>$form->createView()
         ]);
     }
     /**
      * @Route("/{customerId}/update", name="update", requirements={"customerId"= "\d+"})
      */
     //mise a jour d'un customer par rapport a son id en passant par le formulaire de creation
-    public function edit(EntityManagerInterface $em, Request $request, $customerId){ 
+    public function edit(EntityManagerInterface $em, Request $request, CustomerRepository $cr, $customerId){ 
 
-        $customer = $em->getRepository(Customer::class)->find($customerId);
-        $user = $this->getUser();
+        $customer = $cr->find($customerId);
 
         $customer->setEditAt(new \Datetime())
-                 ->setUserEdit($user->getUsername());
+                 ->setUserEdit($this->getUser()->getUsername());
                
         $form = $this->createForm(CustomerType::class,$customer);
 
@@ -87,7 +81,7 @@ class CustomerController extends AbstractController
                 $em->flush();
                 
                 $this->addFlash(
-                    "success","Le customer {$customer->getName()} a été édité avec succès"
+                    "success","Le client {$customer->getName()} a été édité avec succès"
                 );
 
                 return $this->redirectToRoute('customer_list');
@@ -95,8 +89,7 @@ class CustomerController extends AbstractController
 
         return $this->render('customer/update.html.twig',[
             'form'=>$form->createView(),
-            'customer'=>$customer,
-            'user'=>$user
+            'customer'=>$customer
         ]);
 
     }
@@ -105,9 +98,9 @@ class CustomerController extends AbstractController
      * @Route("/{customerId}/delete", name="delete", requirements={"customerId"= "\d+"})
      */
     //supprime un customer par rapport a son id
-    public function delete(EntityManagerInterface $em, $customerId){
+    public function delete(EntityManagerInterface $em, CustomerRepository $cr, $customerId){
         
-        $deleteClient = $em->getRepository (Customer::class)->find($customerId);
+        $deleteClient = $cr->find($customerId);
 
         $name = $deleteClient->getName();
 
@@ -116,13 +109,13 @@ class CustomerController extends AbstractController
             $em->flush();
             
             $this->addFlash(
-                "success","Le customer $name a été supprimé avec succès"
+                "success","Le client $name a été supprimé avec succès"
             );
             return $this->redirectToRoute('customer_list');
         }catch(ForeignKeyConstraintViolationException $e){
 
             $this->addFlash(
-                "warning","Le customer ne peut etre supprimé. Il possède toujours des sites web"
+                "warning","Le client ne peut etre supprimé. Il possède toujours des sites web"
             );
 
             
