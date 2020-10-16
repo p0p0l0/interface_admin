@@ -6,42 +6,43 @@ use App\Entity\User;
 use App\Entity\Customer;
 use App\Entity\Website;
 use App\Form\WebsiteType;
+use App\Repository\CustomerRepository;
+use App\Repository\WebsiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/{userId}/{customerId}", name="website_", requirements = {"userId" = "\d+", "customerId" = "\d+"})
+ * @Route("/customer/{customerId}/website", name="website_", requirements = {"customerId" = "\d+"})
  */
 class WebsiteController extends AbstractController
 {
     /**
-     * @Route("/website", name="list")
+     * @Route("/list", name="list")
      */
-    public function index(EntityManagerInterface $em, $userId, $customerId)
+    public function index(EntityManagerInterface $em, CustomerRepository $cr,WebsiteRepository $wr, $customerId)
     {
-        $customer = $em->getRepository(Customer::class)->find($customerId);
-        $user = $em->getRepository(User::class)->find($userId);
-        $websites = $em->getRepository(Website::class)->findAll();
+        $customer = $cr->find($customerId);
+        $websites = $wr->findAll();
 
         return $this->render('website/index.html.twig',[
             'websites'=>$websites,
-            'user'=>$user,
-            'customer'=>$customer
+            'customer'=>$customer,
+            'user'=>$this->getUser()
         ]);
     }
 
     /**
-     * @Route("/create", name="create", requirements = {"userId" = "\d+", "customerId" = "\d+"})
+     * @Route("/create", name="create", requirements = {"customerId" = "\d+"})
      */
-    public function create(EntityManagerInterface $em, Request $request, $userId, $customerId ){
+    public function create(EntityManagerInterface $em, CustomerRepository $cr, Request $request, $customerId ){
        
-        $customer = $em->getRepository(Customer::class)->find($customerId);
-        $user = $em->getRepository(User::class)->find($userId); 
+        $customer = $cr->find($customerId);
+        $user = $this->getUser(); 
 
         $customer->setEditAt(new \Datetime())
-               ->setUserEdit($user->getUsername());
+                 ->setUserEdit($user->getUsername());
                
         $website = new Website();
        
@@ -49,39 +50,38 @@ class WebsiteController extends AbstractController
         $form->handleRequest($request);
         
         $website->setCustomer($customer);
-        $name = $website->getName();
             
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($website);
             $em->flush();
 
             $this->addFlash(
-                "success","Le website $name de {$customer->getName()} a bien été ajouté "
+                "success","Le website {$website->getName()} de {$customer->getName()} a bien été ajouté "
             );
 
             return $this->redirectToRoute('website_list',[
-                'userId'=>$userId,
                 'customerId'=>$customerId
             ]);
         }
 
         return $this->render('website/create.html.twig',[
             'form'=>$form->createView(),
-            'user'=>$user,
-            'customer'=>$customer
+            'customer'=>$customer,
+            'user'=>$user
 
         ]);
     }
 
 
     /**
-     * @Route("/{websiteId}/edit", name="edit", requirements={"userId" = "\d+", "customerId" = "\d+", "websiteId"="\d+"})
+     * @Route("/{websiteId}/update", name="update", requirements={"customerId" = "\d+", "websiteId"="\d+"})
      */
-    public function edit(EntityManagerInterface $em, Request $request, $userId, $customerId, $websiteId){
+    public function edit(EntityManagerInterface $em, Request $request, WebsiteRepository $wr, 
+                        CustomerRepository $cr, $customerId, $websiteId){
         
-        $website = $em->getRepository(Website::class)->find($websiteId);
-        $customer = $em->getRepository(Customer::class)->find($customerId);
-        $user = $em->getRepository(User::class)->find($userId);
+        $website = $wr->find($websiteId);
+        $customer = $cr->find($customerId);
+        $user = $this->getUser();
 
         $customer->setEditAt(new \DateTime())
                  ->setUserEdit($user->getUsername());
@@ -97,7 +97,6 @@ class WebsiteController extends AbstractController
             );
 
             return $this->redirectToRoute('website_list',[
-                'userId'=>$userId,
                 'customerId'=>$customerId
             ]);
         }
@@ -111,26 +110,25 @@ class WebsiteController extends AbstractController
     }
 
     /**
-     * @Route("/{websiteId}/delete", name="delete", requirements={"userId" = "\d+", "customerId" = "\d+", "websiteId"="\d+"})
+     * @Route("/{websiteId}/delete", name="delete", requirements={"customerId" = "\d+", "websiteId"="\d+"})
      */
-    public function delete(EntityManagerInterface $em, $userId, $customerId, $websiteId){
-        $user = $em->getRepository(User::class)->find($userId);
-        $customer =$em->getRepository(Customer::class)->find($customerId);
-        $deletWebsite = $em->getRepository(Website::class)->find($websiteId);
-        $name = $deletWebsite->getName();
+    public function delete(EntityManagerInterface $em, CustomerRepository $cr, $customerId, WebsiteRepository $wr,
+                           $websiteId){
+    
+        $customer = $cr->find($customerId);
+        $deletWebsite = $wr->find($websiteId);
 
         $customer->setEditAt(new \DateTime())
-                 ->setUserEdit($user->getUsername());
+                 ->setUserEdit($this->getUser()->getUsername());
             
         $em->remove($deletWebsite);
         $em->flush();
 
         $this->addFlash(
-            "success","Le site $name a bien été supprimé"
+            "success","Le site {$deletWebsite->getName()} a bien été supprimé"
         );
 
         return $this->redirectToRoute('website_list',[
-            'userId'=>$userId,
             'customerId'=>$customerId
         ]);
     }

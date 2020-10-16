@@ -6,7 +6,7 @@
     <div class="row d-flex justify-content-center">
         <h2> Liste des customers</h2>
     </div>
-
+    {# Affichage flash#}
     <div class="mt-3">
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
@@ -21,15 +21,16 @@
         {% endfor %}
     </div>
     
+    {# Affichage bouton creation client#}
     <div> 
-        <a href="{{path('customer_create',{'userId' : user.id})}}">
+        <a href="{{path('customer_create')}}">
             <button type="button" class="btn btn-primary">
                 <i class="fa fa-plus"></i> Création d'un customer
             </button>   
         </a>
     </div>
  
-    
+    {# Tableau des clients#}
     <table class="table mt-2">
         <thead>
             <tr>    
@@ -48,21 +49,21 @@
             
             {% for customer in customers %}
                 <tr>
-                    <td> <a href="{{path('website_list',{'userId' : user.id, 'customerId':customer.id})}}">{{ customer.name }}</a></td>
+                    <td> <a href="{{path('website_list',{'customerId':customer.id})}}">{{ customer.name }}</a></td>
                     <td>{{ customer.mail }}</td>
-                    <td>{{ customer.telephone }}</td>
+                    <td>{{ customer.phone }}</td>
                     <td>{{ customer.userCreation }}</td>
                     <td>{{ customer.createdAt | date('d/m/Y H:i', 'Europe/Paris')}}</td>
                     <td>{{ customer.userEdit }}</td>
                     <td>{{ customer.editAt | date('d/m/Y H:i','Europe/Paris')}}</td>
                     <td>    
-                        <a href="{{ path('customer_edit',{'userId' : user.id, 'customerId': customer.id}) }}">
+                        <a href="{{ path('customer_update',{'customerId': customer.id}) }}">
                             <button type="button" class="btn btn-primary">
                                 <i class="fa fa-edit"></i>
                             </button>   
                         </a>
                         &nbsp;
-                        <a href="{{ path('customer_delete',{'userId' : user.id, 'customerId' : customer.id}) }}">
+                        <a href="{{ path('customer_delete',{'customerId' : customer.id}) }}">
                             <button type="button" class="btn btn-outline-danger">
                                 <i class="fa fa-minus"></i>
                             </button>

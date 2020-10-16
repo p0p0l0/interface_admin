@@ -12,42 +12,38 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
-
+/**
+ * @Route("/customer", name ="customer_")
+ */
 class CustomerController extends AbstractController
 {
 
     /**
-     * @Route("/", name="home")
-     */
-    public function home(){
-        return $this->render('customer/home.html.twig');
-    }
-    /**
-     * @Route("/customer/list", name="customer_list")
+     * @Route("/list", name="list")
      */
     //Retourne la liste des customers presents ds la base
-    public function list(EntityManagerInterface $em)
+    public function index(EntityManagerInterface $em)
     {     
         $customers= $em->getRepository (Customer::class)->findAll();
-        $user = $this->getUser();
-        return $this->render('customer/list.html.twig',[
+        
+        return $this->render('customer/index.html.twig',[
             'customers' =>$customers,
-            'user'=> $user
+            'user'=>$this->getUser()
         ]);
     }
 
     /**
-     * @Route("/create", name="customer_create")
+     * @Route("/create", name="create")
      */
     //création d'un customer ds la bdd
-    public function create(EntityManagerInterface $em, Request $request, $userId){
+    public function create(EntityManagerInterface $em, Request $request){
         
         $customer = new Customer();
     
-        $user = $em->getRepository(User::class)->find($userId);
+        $user = $this->getUser();
 
         $customer->setCreatedAt(new \DateTime())
-               ->setUserCreation($user->getUsername());
+                 ->setUserCreation($user->getUsername());
                 
 
         $form = $this->createForm(CustomerType::class,$customer);
@@ -55,7 +51,7 @@ class CustomerController extends AbstractController
 
         $name = $customer->getName();
     
-            if($form->isSubmitted() && $form->isValid()){
+                if($form->isSubmitted() && $form->isValid()){
                 $em->persist($customer);
                 $em->flush();
 
@@ -63,9 +59,7 @@ class CustomerController extends AbstractController
                     "success","Le customer $name a été ajouté avec succès"
                 );
 
-            return $this->redirectToRoute('customer_list',[
-                'userId'=>$userId
-            ]);
+            return $this->redirectToRoute('customer_list');
             }
 
         return $this->render('customer/create.html.twig',[
@@ -74,32 +68,29 @@ class CustomerController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{customerId}/edit", name="customer_edit", requirements={"customerId"= "\d+"})
+     * @Route("/{customerId}/update", name="update", requirements={"customerId"= "\d+"})
      */
     //mise a jour d'un customer par rapport a son id en passant par le formulaire de creation
-    public function edit(EntityManagerInterface $em, Request $request, $userId, $customerId){ 
+    public function edit(EntityManagerInterface $em, Request $request, $customerId){ 
 
         $customer = $em->getRepository(Customer::class)->find($customerId);
-        $user = $em->getRepository(User::class)->find($userId);
+        $user = $this->getUser();
 
         $customer->setEditAt(new \Datetime())
-               ->setUserEdit($user->getUsername());
+                 ->setUserEdit($user->getUsername());
                
         $form = $this->createForm(CustomerType::class,$customer);
-        $form->handleRequest($request);
 
-        $name = $customer->getName();
+        $form->handleRequest($request);
 
             if($form->isSubmitted() && $form->isValid()){
                 $em->flush();
                 
                 $this->addFlash(
-                    "success","Le customer $name a été édité avec succès"
+                    "success","Le customer {$customer->getName()} a été édité avec succès"
                 );
 
-                return $this->redirectToRoute('customer_list',[
-                    'userId'=>$userId
-                ]);
+                return $this->redirectToRoute('customer_list');
             }
 
         return $this->render('customer/create.html.twig',[
@@ -110,10 +101,10 @@ class CustomerController extends AbstractController
     }
 
     /**
-     * @Route("/{customerId}/delete", name="customer_delete", requirements={"customerId"= "\d+"})
+     * @Route("/{customerId}/delete", name="delete", requirements={"customerId"= "\d+"})
      */
     //supprime un customer par rapport a son id
-    public function delete(EntityManagerInterface $em, $userId, $customerId){
+    public function delete(EntityManagerInterface $em, $customerId){
         
         $deleteClient = $em->getRepository (Customer::class)->find($customerId);
 
@@ -126,9 +117,7 @@ class CustomerController extends AbstractController
             $this->addFlash(
                 "success","Le customer $name a été supprimé avec succès"
             );
-            return $this->redirectToRoute('customer_list',[
-                'userId'=>$userId
-            ]);
+            return $this->redirectToRoute('customer_list');
         }catch(ForeignKeyConstraintViolationException $e){
 
             $this->addFlash(
