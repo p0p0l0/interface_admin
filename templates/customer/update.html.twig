@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mise à jour du client{% endblock %}
+
+{% block body %}
+<div class="row d-flex justify-content-center">
+    <h2>Modification du client</h2>
+</div>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="{{ path('customer_update',{'customerId':customer.id})}}">Info Client</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('website_list',{'customerId':customer.id})}}">Website</a>
+    </li>
+  </ul>
+
+<div class= "d-flex justify-content-end  mt-3">
+    <a href=" {{path('customer_list')}}">
+        <button type="button" class="btn btn-primary">Retour à la liste des clients
+        </button>
+    </a>
+</div>
+
+<div class="col-10">
+    {{ form_start(form)}}
+    {{ form_end(form)}}
+</div>
+{% endblock %}
