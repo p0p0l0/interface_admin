@@ -41,7 +41,6 @@ class CustomerController extends AbstractController
         $customer = new Customer();
 
         $customer->setUserCreation($this->getUser()->getUsername());
-                
 
         $form = $this->createForm(CustomerType::class,$customer);
         $form->handleRequest($request);

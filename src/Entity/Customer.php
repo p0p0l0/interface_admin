@@ -206,7 +206,7 @@ class Customer
 
             return $this;
         }
-        
+
      /**
      * @ORM\PrePersist
      */
@@ -220,6 +220,13 @@ class Customer
      */
     public function setEditAtValue(){
         $this->editAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setStatusValue(){
+        $this->status ='Test';
     }
 
   

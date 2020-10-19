@@ -18,6 +18,20 @@ class CustomerType extends AbstractType
     {
 
         $builder
+            ->add('status',ChoiceType::class,[
+                'label'=>'Statut', 
+                'choices'=>[
+                    'Test'=> 'Test',
+                    'Formation'=>'Formation',
+                    'Production'=>'Production',
+                    'Fermé'=>'Ferme'
+                ],
+                'expanded'=> true,
+                'label_attr'=>[
+                    'class'=>'radio-inline'
+                ]
+                
+            ])
             ->add('name', TextType::class,[
                 'label'=>'Nom'
             ])
@@ -27,24 +41,6 @@ class CustomerType extends AbstractType
             ->add('phone',TelType::class,[
                 'label'=>'Telephone',
                 'required'=>false
-            ])
-            ->add('status',ChoiceType::class,[
-                'label'=>'Statut',
-                
-                'choices'=>[
-                    'Test'=> 'Test',
-                    'Formation'=>'Formation',
-                    'Production'=>'Production',
-                    'Fermé'=>'Ferme'
-                ],
-                
-                'data'=>'Test',
-                'expanded'=> true,
-                'multiple'=> false,
-                'label_attr'=>[
-                    'class'=>'radio-inline'
-                ]
-                
             ])
             ->add('Valider',SubmitType::class)
         ;
