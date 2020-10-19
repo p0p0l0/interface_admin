@@ -26,8 +26,6 @@
                 <th scope="col">Telephone</th>
                 <th scope="col">UserCreation</th>
                 <th scope="col">Date de création</th>
-                <th scope="col">User Edit</th>
-                <th scope="col">Date de Modification</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -42,8 +40,6 @@
                     <td>{{ customer.phone }}</td>
                     <td>{{ customer.userCreation }}</td>
                     <td>{{ customer.createdAt | date('d/m/Y H:i', 'Europe/Paris')}}</td>
-                    <td>{{ customer.userEdit }}</td>
-                    <td>{{ customer.editAt | date('d/m/Y H:i','Europe/Paris')}}</td>
                     <td>    
                         <a href="{{ path('customer_update',{'customerId': customer.id}) }}">
                             <button type="button" class="btn btn-primary">
