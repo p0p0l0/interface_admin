@@ -24,13 +24,12 @@ class CustomerType extends AbstractType
                     'Test'=> 'Test',
                     'Formation'=>'Formation',
                     'Production'=>'Production',
-                    'Fermé'=>'Ferme'
+                    'Fermé'=>'Ferme',
                 ],
                 'expanded'=> true,
                 'label_attr'=>[
                     'class'=>'radio-inline'
                 ]
-                
             ])
             ->add('name', TextType::class,[
                 'label'=>'Nom'
