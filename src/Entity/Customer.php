@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
- * @UniqueEntity("name")
+ * @UniqueEntity("name", message="Un client existe déjà avec ce nom")
  * @ORM\HasLifecycleCallbacks()
  */
 class Customer
@@ -221,15 +221,5 @@ class Customer
     public function setEditAtValue(){
         $this->editAt = new \DateTime();
     }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setStatusValue(){
-        $this->status ='Test';
-    }
-
-  
-
 
 }    
