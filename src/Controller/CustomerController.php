@@ -40,8 +40,7 @@ class CustomerController extends AbstractController
         
         $customer = new Customer();
 
-        $customer->setCreatedAt(new \DateTime())
-                 ->setUserCreation($this->getUser()->getUsername());
+        $customer->setUserCreation($this->getUser()->getUsername());
                 
 
         $form = $this->createForm(CustomerType::class,$customer);
@@ -72,9 +71,15 @@ class CustomerController extends AbstractController
 
         $customer = $cr->find($customerId);
 
-        $customer->setEditAt(new \Datetime())
-                 ->setUserEdit($this->getUser()->getUsername());
-               
+        if(empty($customer)){ 
+            $this->addFlash(
+                "warning","Le client n'existe pas."
+            );
+            return $this->redirectToRoute('customer_list');
+        }
+
+        $customer->setUserEdit($this->getUser()->getUsername());
+
         $form = $this->createForm(CustomerType::class,$customer);
 
         $form->handleRequest($request);
@@ -105,6 +110,13 @@ class CustomerController extends AbstractController
     public function delete(EntityManagerInterface $em, CustomerRepository $cr, $customerId){
         
         $deleteClient = $cr->find($customerId);
+
+        if(empty($customer)){ 
+            $this->addFlash(
+                "warning","Le client n'existe pas."
+            );
+            return $this->redirectToRoute('customer_list');
+        }
 
         $name = $deleteClient->getName();
 

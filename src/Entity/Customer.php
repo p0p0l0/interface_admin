@@ -3,12 +3,17 @@
 namespace App\Entity;
 
 use App\Repository\CustomerRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * @UniqueEntity("name")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Customer
 {
@@ -26,6 +31,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email
      */
     private $mail;
 
@@ -58,6 +64,11 @@ class Customer
      * @ORM\OneToMany(targetEntity=Website::class, mappedBy="customer")
      */
     private $websites;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
 
     public function __construct()
     {
@@ -184,6 +195,18 @@ class Customer
         return $this;
     }
 
+    public function getStatus(): ?string
+        {
+            return $this->status;
+        }
+
+        public function setStatus(string $status): self
+        {
+            $this->status = $status;
+
+            return $this;
+        }
+        
      /**
      * @ORM\PrePersist
      */
@@ -191,4 +214,15 @@ class Customer
     {
         $this->createdAt = new \DateTime();
     }
-}
+
+   /**
+     * @ORM\PreFlush
+     */
+    public function setEditAtValue(){
+        $this->editAt = new \DateTime();
+    }
+
+  
+
+
+}    
