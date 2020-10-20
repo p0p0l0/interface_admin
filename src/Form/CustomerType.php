@@ -16,16 +16,14 @@ class CustomerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
+        $choices =[ 'Test'=> 'Test',
+                    'Formation'=>'Formation',
+                    'Production'=>'Production',
+                    'Fermé'=>'Ferme'];
         $builder
             ->add('status',ChoiceType::class,[
                 'label'=>'Statut', 
-                'choices'=>[
-                    'Test'=> 'Test',
-                    'Formation'=>'Formation',
-                    'Production'=>'Production',
-                    'Fermé'=>'Ferme',
-                ],
+                'choices'=>$choices,
                 'expanded'=> true,
                 'label_attr'=>[
                     'class'=>'radio-inline'

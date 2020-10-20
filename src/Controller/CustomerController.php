@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 
 use App\Entity\Customer;
 use App\Form\CustomerType;
@@ -23,7 +22,7 @@ class CustomerController extends AbstractController
      * @Route("/list", name="list")
      */
     //Retourne la liste des customers presents ds la base
-    public function index(EntityManagerInterface $em, CustomerRepository $cr)
+    public function index(CustomerRepository $cr)
     {     
         $customers= $cr->findAll();
         
@@ -109,19 +108,19 @@ class CustomerController extends AbstractController
     //supprime un customer par rapport a son id
     public function delete(EntityManagerInterface $em, CustomerRepository $cr, $customerId){
         
-        $deleteClient = $cr->find($customerId);
+        $deleteCustomer = $cr->find($customerId);
 
-        if(empty($customer)){ 
+        if(empty($customerId)){ 
             $this->addFlash(
                 "warning","Le client n'existe pas."
             );
             return $this->redirectToRoute('customer_list');
         }
 
-        $name = $deleteClient->getName();
+        $name = $deleteCustomer->getName();
 
         try{
-            $em->remove($deleteClient);
+            $em->remove($deleteCustomer);
             $em->flush();
             
             $this->addFlash(
