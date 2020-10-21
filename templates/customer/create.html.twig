@@ -7,12 +7,14 @@
         <h2>Création du client</h2>
     </div>
 
+    {# Bouton retour liste clients #}
     <div class= "d-flex justify-content-end mt-3">
         <a href=" {{path('customer_list')}}">
             <button type="button" class="btn btn-primary">Retour à la liste des clients</button>
         </a>
     </div>
 
+    {# formulaire CustomerType #}
     <div class="col-10">
         {{ form_start(form)}}
         {{ form_end(form)}}

@@ -139,4 +139,14 @@ class Website
     {
         $this->ipServeur = "140.40.40.40";
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setNameFolderValue()
+    {
+        $this->nameFolder = "le nom du dossier";
+    }
+
+    
 }

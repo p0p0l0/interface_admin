@@ -12,14 +12,18 @@
     </head>
     <body>
         <div class="container">
-            <div class="row mt-3">
-                {% block body %}
-                
-                {% if error %}
-                    <div class="alert alert-danger">
-                        {{ error.messageKey | trans(error.messageData,'security')}}
-                    </div>
-                {% endif %}
+            <div class="text-center mt-4">
+                <h2 class= "display-1"><strong>Bienvenue !!!</strong></h2>
+            </div>
+            {% block body %}         
+                <div class="row mt-3">    
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error.messageKey | trans(error.messageData,'security')}}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="row mt-1">
                     <form action="{{ path('login_check') }}" method = "post">
                         <div class="form-group">
                             <label for = "username">Nom d'utilisateur</label>
@@ -33,8 +37,8 @@
                             <button type= "submit"class ="btn btn-primary">Connexion</button>
                         </div>
                     </form>
-                {% endblock %}
-            </div>
+                </div>
+            {% endblock %}
         </div>
         
         {% block javascripts %}

@@ -3,28 +3,34 @@
 {% block title %}Mise à jour du client{% endblock %}
 
 {% block body %}
-<div class="row d-flex justify-content-center">
+  <div class="row d-flex justify-content-center">
     <h2>Mise à jour de {{customer.name}}</h2>
-</div>
+  </div>
 
-<ul class="nav nav-tabs">
+  {# Navbar Tab#}
+  <ul class="nav nav-tabs">
+    {# Redirige vers update clients #}
     <li class="nav-item">
       <a class="nav-link active" href="{{ path('customer_update',{'customerId':customer.id})}}">Info Client</a>
     </li>
+
+    {# Redirige vers les sites web du client#}
     <li class="nav-item">
       <a class="nav-link" href="{{ path('website_list',{'customerId':customer.id})}}">Website</a>
     </li>
   </ul>
 
-<div class= "d-flex justify-content-end  mt-3">
+  {# Bouton retour vers la liste clients#}
+  <div class= "d-flex justify-content-end  mt-3">
     <a href=" {{path('customer_list')}}">
-        <button type="button" class="btn btn-primary">Retour à la liste des clients
-        </button>
+      <button type="button" class="btn btn-primary">Retour à la liste des clients
+      </button>
     </a>
-</div>
+  </div>
 
-<div class="col-10">
+  {# Formulaire CustomerType#}
+  <div class="col-10">
     {{ form_start(form)}}
     {{ form_end(form)}}
-</div>
+  </div>
 {% endblock %}

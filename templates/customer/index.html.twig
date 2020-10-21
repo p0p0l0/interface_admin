@@ -16,7 +16,7 @@
         </a>
     </div>
  
-    {# Tableau des clients#}
+    {# Tableau des clients #}
     <table class="table mt-2">
         <thead>
             <tr>
@@ -24,9 +24,8 @@
                 <th scope="col">Nom</th>
                 <th scope="col">Mail</th>
                 <th scope="col">Telephone</th>
-                <th scope="col">UserCreation</th>
+                <th scope="col">Créateur</th>
                 <th scope="col">Date de création</th>
-                <th scope="col">Date de mise a jour</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -41,17 +40,19 @@
                     <td>{{ customer.phone }}</td>
                     <td>{{ customer.userCreation }}</td>
                     <td>{{ customer.createdAt | date('d/m/Y H:i', 'Europe/Paris')}}</td>
-                    <td>{{ customer.editAt | date('d/m/Y H:i', 'Europe/Paris')}}</td>
-                    <td>    
+                    <td>  
+                        {# Bouton update #}  
                         <a href="{{ path('customer_update',{'customerId': customer.id}) }}">
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-outline-primary">
                                 <i class="fa fa-edit"></i>
                             </button>   
                         </a>
                         &nbsp;
+
+                        {# Bouton delete #}
                         <a href="{{ path('customer_delete',{'customerId' : customer.id}) }}">
                             <button type="button" class="btn btn-outline-danger">
-                                <i class="fa fa-minus"></i>
+                                <i class="fa fa-trash-alt"></i>
                             </button>
                         </a>
                     </td>
@@ -59,5 +60,5 @@
             {% endfor %}
         </tbody>
     </table>
-
+</div>
 {% endblock %}

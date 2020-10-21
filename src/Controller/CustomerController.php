@@ -39,24 +39,24 @@ class CustomerController extends AbstractController
         
         $customer = new Customer();
 
-        $customer->setUserCreation($this->getUser()->getUsername())
-                 ->setStatus('Test');
+        $customer->setStatus('Test');
 
         $form = $this->createForm(CustomerType::class,$customer);
+
         $form->handleRequest($request);
     
-                if($form->isSubmitted() && $form->isValid()){
-                $em->persist($customer);
-                $em->flush();
+        if($form->isSubmitted() && $form->isValid()){
+            $em->persist($customer);
+            $em->flush();
 
-                $this->addFlash(
-                    "success","Le client {$customer->getName()} a été ajouté avec succès"
-                );
+            $this->addFlash(
+                "success","Le client {$customer->getName()} a été ajouté avec succès"
+            );
 
             return $this->redirectToRoute('customer_update',[
                 'customerId'=>$customer->getId()    
             ]);
-            }
+        }
 
         return $this->render('customer/create.html.twig',[
             'form'=>$form->createView()
@@ -71,29 +71,30 @@ class CustomerController extends AbstractController
         $customer = $cr->find($customerId);
 
         if(empty($customer)){ 
+
             $this->addFlash(
                 "warning","Le client n'existe pas."
             );
+
             return $this->redirectToRoute('customer_list');
         }
 
-        $customer->setUserEdit($this->getUser()->getUsername());
 
         $form = $this->createForm(CustomerType::class,$customer);
 
         $form->handleRequest($request);
 
-            if($form->isSubmitted() && $form->isValid()){
-                $em->flush();
-                
-                $this->addFlash(
-                    "success","Le client {$customer->getName()} a été édité avec succès"
-                );
+        if($form->isSubmitted() && $form->isValid()){
+            $em->flush();
+            
+            $this->addFlash(
+                "success","Le client {$customer->getName()} a été édité avec succès"
+            );
 
-                return $this->redirectToRoute('customer_update',[
-                    'customerId'=>$customerId
-                ]);
-            }
+            return $this->redirectToRoute('customer_update',[
+                'customerId'=>$customerId
+            ]);
+        }
 
         return $this->render('customer/update.html.twig',[
             'form'=>$form->createView(),

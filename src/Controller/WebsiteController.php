@@ -53,9 +53,6 @@ class WebsiteController extends AbstractController
             );
             return $this->redirectToRoute('customer_list');
         }
-
-        $customer->setEditAt(new \Datetime())
-                 ->setUserEdit($this->getUser()->getUsername());
                
         $website = new Website();
        
@@ -114,7 +111,6 @@ class WebsiteController extends AbstractController
             ]);
         }
 
-        $customer->setUserEdit($this->getUser()->getUsername());
 
         $form = $this->createForm(WebsiteType::class,$website);
         $form->handleRequest($request);
@@ -167,7 +163,6 @@ class WebsiteController extends AbstractController
             ]);
         }
 
-        $customer->setUserEdit($this->getUser()->getUsername());
             
         $em->remove($deleteWebsite);
         $em->flush();
