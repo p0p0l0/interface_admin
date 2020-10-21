@@ -110,21 +110,19 @@ class CustomerController extends AbstractController
         
         $deleteCustomer = $cr->find($customerId);
 
-        if(empty($customerId)){ 
+        if(empty($deleteCustomer)){ 
             $this->addFlash(
                 "warning","Le client n'existe pas."
             );
             return $this->redirectToRoute('customer_list');
         }
 
-        $name = $deleteCustomer->getName();
-
         try{
             $em->remove($deleteCustomer);
             $em->flush();
             
             $this->addFlash(
-                "success","Le client $name a été supprimé avec succès"
+                "success","Le client {$deleteCustomer->getName()} a été supprimé avec succès"
             );
             return $this->redirectToRoute('customer_list');
         }catch(ForeignKeyConstraintViolationException $e){

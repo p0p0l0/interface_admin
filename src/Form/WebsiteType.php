@@ -22,9 +22,9 @@ class WebsiteType extends AbstractType
                 'label'=>'URL'
             ])
                 
-            ->add('ipServeur',TextType::class,[
-                'label'=>'Adresse du serveur'
-            ])
+            //->add('ipServeur',TextType::class,[
+            //    'label'=>'Adresse du serveur'
+            //])
             ->add('nameFolder', TextType::class,[
                 'label'=>'Nom du dossier'
             ])

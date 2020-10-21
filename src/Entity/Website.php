@@ -5,10 +5,13 @@ namespace App\Entity;
 use App\Repository\WebsiteRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
  * @ORM\Entity(repositoryClass=WebsiteRepository::class)
+ * @UniqueEntity("name", message="Un site web existe déjà avec ce nom")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Website
 {
@@ -129,6 +132,11 @@ class Website
         return $this;
     }
 
-
-
+    /**
+     * @ORM\PrePersist
+     */
+    public function setIpServeurValue()
+    {
+        $this->ipServeur = "140.40.40.40";
+    }
 }

@@ -2,16 +2,12 @@
 
 namespace App\Entity;
 
-use App\Traits\UserTrait;
-use App\Service\ExampleService;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Security\Core\Security;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
@@ -35,7 +31,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Email
+     * @Assert\Email(message="L'email n'est pas valide")
      */
     private $mail;
 

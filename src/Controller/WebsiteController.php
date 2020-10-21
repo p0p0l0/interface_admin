@@ -24,6 +24,14 @@ class WebsiteController extends AbstractController
     public function index(EntityManagerInterface $em, CustomerRepository $cr,WebsiteRepository $wr, $customerId)
     {
         $customer = $cr->find($customerId);
+
+        if(empty($customer)){ 
+            $this->addFlash(
+                "warning","Le client n'existe pas."
+            );
+            return $this->redirectToRoute('customer_list');
+        }
+
         $websites = $wr->findAll();
 
         return $this->render('website/index.html.twig',[
@@ -38,6 +46,13 @@ class WebsiteController extends AbstractController
     public function create(EntityManagerInterface $em, CustomerRepository $cr, Request $request, $customerId ){
        
         $customer = $cr->find($customerId);
+
+        if(empty($customer)){ 
+            $this->addFlash(
+                "warning","Le client n'existe pas."
+            );
+            return $this->redirectToRoute('customer_list');
+        }
 
         $customer->setEditAt(new \Datetime())
                  ->setUserEdit($this->getUser()->getUsername());
@@ -75,11 +90,26 @@ class WebsiteController extends AbstractController
     public function edit(EntityManagerInterface $em, Request $request, WebsiteRepository $wr, 
                         CustomerRepository $cr, $customerId, $websiteId){
         
-        $website = $wr->find($websiteId);
+      
         $customer = $cr->find($customerId);
 
-        $customer->setEditAt(new \DateTime())
-                 ->setUserEdit($this->getUser()->getUsername());
+        if(empty($customer)){ 
+            $this->addFlash(
+                "warning","Le client n'existe pas."
+            );
+            return $this->redirectToRoute('customer_list');
+        }
+
+        $website = $wr->find($websiteId);
+        
+        if(empty($website)){ 
+            $this->addFlash(
+                "warning","Le client n'existe pas."
+            );
+            return $this->redirectToRoute('customer_list');
+        }
+
+        $customer->setUserEdit($this->getUser()->getUsername());
 
         $form = $this->createForm(WebsiteType::class,$website);
         $form->handleRequest($request);
@@ -110,16 +140,30 @@ class WebsiteController extends AbstractController
                            $websiteId){
     
         $customer = $cr->find($customerId);
-        $deletWebsite = $wr->find($websiteId);
 
-        $customer->setEditAt(new \DateTime())
-                 ->setUserEdit($this->getUser()->getUsername());
+        if(empty($customer)){ 
+            $this->addFlash(
+                "warning","Le client n'existe pas."
+            );
+            return $this->redirectToRoute('customer_list');
+        }
+
+        $deleteWebsite = $wr->find($websiteId);
+
+        if(empty($deleteWebsite)){ 
+            $this->addFlash(
+                "warning","Le client n'existe pas."
+            );
+            return $this->redirectToRoute('customer_list');
+        }
+
+        $customer->setUserEdit($this->getUser()->getUsername());
             
-        $em->remove($deletWebsite);
+        $em->remove($deleteWebsite);
         $em->flush();
 
         $this->addFlash(
-            "success","Le site {$deletWebsite->getName()} a bien été supprimé"
+            "success","Le site {$deleteWebsite->getName()} a bien été supprimé"
         );
 
         return $this->redirectToRoute('website_list',[
