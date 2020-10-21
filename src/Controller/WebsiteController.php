@@ -100,13 +100,18 @@ class WebsiteController extends AbstractController
             return $this->redirectToRoute('customer_list');
         }
 
-        $website = $wr->find($websiteId);
+        $website = $wr->findOneBy([
+            'customer'=>$customer,
+            'id'=>$websiteId
+             ]);
         
         if(empty($website)){ 
             $this->addFlash(
-                "warning","Le client n'existe pas."
+                "warning","Le site web n'existe pas."
             );
-            return $this->redirectToRoute('customer_list');
+            return $this->redirectToRoute('website_list',[
+                'customerId'=>$customerId
+            ]);
         }
 
         $customer->setUserEdit($this->getUser()->getUsername());
@@ -148,13 +153,18 @@ class WebsiteController extends AbstractController
             return $this->redirectToRoute('customer_list');
         }
 
-        $deleteWebsite = $wr->find($websiteId);
+        $deleteWebsite = $wr->findOneBy([
+            'customer'=>$customer,
+            'id'=>$websiteId
+            ]);
 
         if(empty($deleteWebsite)){ 
             $this->addFlash(
-                "warning","Le client n'existe pas."
+                "warning","Le site web n'existe pas."
             );
-            return $this->redirectToRoute('customer_list');
+            return $this->redirectToRoute('website_list',[
+                'customerId'=>$customerId
+            ]);
         }
 
         $customer->setUserEdit($this->getUser()->getUsername());
