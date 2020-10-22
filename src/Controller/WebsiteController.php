@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Customer;
 use App\Entity\Website;
+use App\Entity\Customer;
 use App\Form\WebsiteType;
-use App\Repository\CustomerRepository;
 use App\Repository\WebsiteRepository;
+use App\Repository\CustomerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -21,13 +22,13 @@ class WebsiteController extends AbstractController
     /**
      * @Route("/list", name="list")
      */
-    public function index(EntityManagerInterface $em, CustomerRepository $cr,WebsiteRepository $wr, $customerId)
+    public function index(EntityManagerInterface $em, CustomerRepository $cr,WebsiteRepository $wr, $customerId, TranslatorInterface $translator)
     {
         $customer = $cr->find($customerId);
 
         if(empty($customer)){ 
             $this->addFlash(
-                "warning","Le client n'existe pas."
+                "warning",$translator->trans("The customer doesn't exist")
             );
             return $this->redirectToRoute('customer_list');
         }
@@ -43,13 +44,13 @@ class WebsiteController extends AbstractController
     /**
      * @Route("/create", name="create", requirements = {"customerId" = "\d+"})
      */
-    public function create(EntityManagerInterface $em, CustomerRepository $cr, Request $request, $customerId ){
+    public function create(EntityManagerInterface $em, CustomerRepository $cr, Request $request, $customerId, TranslatorInterface $translator ){
        
         $customer = $cr->find($customerId);
 
         if(empty($customer)){ 
             $this->addFlash(
-                "warning","Le client n'existe pas."
+                "warning",$translator->trans("The customer doesn't exist")
             );
             return $this->redirectToRoute('customer_list');
         }
@@ -66,7 +67,7 @@ class WebsiteController extends AbstractController
             $em->flush();
 
             $this->addFlash(
-                "success","Le website {$website->getName()} de {$customer->getName()} a bien été ajouté "
+                "success",$website->getName().$translator->trans(" added successfully")
             );
 
             return $this->redirectToRoute('website_list',[
@@ -85,14 +86,14 @@ class WebsiteController extends AbstractController
      * @Route("/{websiteId}/update", name="update", requirements={"customerId" = "\d+", "websiteId"="\d+"})
      */
     public function edit(EntityManagerInterface $em, Request $request, WebsiteRepository $wr, 
-                        CustomerRepository $cr, $customerId, $websiteId){
+                        CustomerRepository $cr, $customerId, $websiteId, TranslatorInterface $translator){
         
       
         $customer = $cr->find($customerId);
 
         if(empty($customer)){ 
             $this->addFlash(
-                "warning","Le client n'existe pas."
+                "warning",$translator->trans("The customer doesn't exist")
             );
             return $this->redirectToRoute('customer_list');
         }
@@ -104,7 +105,7 @@ class WebsiteController extends AbstractController
         
         if(empty($website)){ 
             $this->addFlash(
-                "warning","Le site web n'existe pas."
+                "warning",$translator->trans(" The website doesn't exist")
             );
             return $this->redirectToRoute('website_list',[
                 'customerId'=>$customerId
@@ -119,7 +120,7 @@ class WebsiteController extends AbstractController
             $em->flush();
 
             $this->addFlash(
-                "success","Le site {$website->getName()} a bien été édité"
+                "success",$website->getName().$translator->trans(" edited successfully")
             );
 
             return $this->redirectToRoute('website_list',[
@@ -138,13 +139,13 @@ class WebsiteController extends AbstractController
      * @Route("/{websiteId}/delete", name="delete", requirements={"customerId" = "\d+", "websiteId"="\d+"})
      */
     public function delete(EntityManagerInterface $em, CustomerRepository $cr, $customerId, WebsiteRepository $wr,
-                           $websiteId){
+                           $websiteId, TranslatorInterface $translator){
     
         $customer = $cr->find($customerId);
 
         if(empty($customer)){ 
             $this->addFlash(
-                "warning","Le client n'existe pas."
+                "warning",$translator->trans("The customer doesn't exist")
             );
             return $this->redirectToRoute('customer_list');
         }
@@ -156,7 +157,7 @@ class WebsiteController extends AbstractController
 
         if(empty($deleteWebsite)){ 
             $this->addFlash(
-                "warning","Le site web n'existe pas."
+                "warning",$translator->trans("The website doesn't exist")
             );
             return $this->redirectToRoute('website_list',[
                 'customerId'=>$customerId
@@ -168,7 +169,7 @@ class WebsiteController extends AbstractController
         $em->flush();
 
         $this->addFlash(
-            "success","Le site {$deleteWebsite->getName()} a bien été supprimé"
+            "success",$deleteWebsite->getName().$translator->trans(" deleted successfully")
         );
 
         return $this->redirectToRoute('website_list',[

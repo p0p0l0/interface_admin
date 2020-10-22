@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
- * @UniqueEntity("name", message="Un client existe déjà avec ce nom")
+ * @UniqueEntity("name")
  * @ORM\HasLifecycleCallbacks()
  */
 class Customer
@@ -31,7 +31,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Email(message="L'email n'est pas valide")
+     * @Assert\Email
      */
     private $mail;
 
@@ -73,7 +73,6 @@ class Customer
     public function __construct()
     {
         $this->websites = new ArrayCollection();
-
     }
 
     public function getId(): ?int
@@ -197,18 +196,18 @@ class Customer
     }
 
     public function getStatus(): ?string
-        {
-            return $this->status;
-        }
+    {
+        return $this->status;
+    }
 
-        public function setStatus(string $status): self
-        {
-            $this->status = $status;
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
-            return $this;
-        }
+        return $this;
+    }
 
-     /**
+    /**
      * @ORM\PrePersist
      */
     public function setCreatedAtValue()
@@ -216,11 +215,11 @@ class Customer
         $this->createdAt = new \DateTime();
     }
 
-   /**
+    /**
      * @ORM\PreFlush
      */
-    public function setEditAtValue(){
+    public function setEditAtValue()
+    {
         $this->editAt = new \DateTime();
     }
-
 }

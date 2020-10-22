@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste websites{% endblock %}
+{% block title %}{% trans %}Website List{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="row d-flex justify-content-center">
@@ -9,7 +9,7 @@
 
     <ul class="nav nav-tabs mb-2">
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('customer_update',{'customerId':customer.id})}}">Info Client</a>
+          <a class="nav-link" href="{{ path('customer_update',{'customerId':customer.id})}}">{% trans %}Customer Info{% endtrans %}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="{{ path('website_list',{'customerId':customer.id})}}">Website</a>
@@ -20,12 +20,12 @@
     <div class= "d-flex justify-content-between mt-5">
         <a href="{{path('website_create',{'customerId':customer.id})}}">
             <button type="button" class="btn btn-primary">
-                <i class="fa fa-plus"></i> Création d'un site web
+                <i class="fa fa-plus"></i> {% trans %}Website Creation{% endtrans %}
             </button>   
         </a>
 
         <a href=" {{path('customer_list')}}">
-            <button type="button" class="btn btn-primary">Retour à la liste des clients</button>
+            <button type="button" class="btn btn-primary">{% trans %}Back to the clients list{% endtrans %}</button>
         </a>
     </div>
 
@@ -33,11 +33,11 @@
         <table class="table mt-2">
             <thead>
                 <tr>    
-                    <th scope="col">Nom</th>
+                    <th scope="col">{% trans %}Name{% endtrans %}</th>
                     <th scope="col">Url</th>
-                    <th scope="col">IP Serveur</th>
-                    <th scope="col">Nom Dossier</th>
-                    <th scope="col">Chemin dossier</th>
+                    <th scope="col">{% trans %}IP Server{% endtrans %}</th>
+                    <th scope="col">{% trans %}Folder Name{% endtrans %}</th>
+                    <th scope="col">{% trans %}Folder Path{% endtrans %}</th>
                     <th scope="col">Actions</th>
                    
                 </tr>
@@ -53,14 +53,14 @@
                         <td>{{website.pathFolder}}</td>
                         <td>
                             <a href="{{ path('website_update',{'customerId': customer.id, 'websiteId':website.id}) }}">
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-outline-primary">
                                     <i class="fa fa-edit"></i>
                                 </button>   
                             </a>
                             &nbsp;
                             <a href="{{ path('website_delete',{'customerId' : customer.id, 'websiteId':website.id}) }}">
                                 <button type="button" class="btn btn-outline-danger">
-                                    <i class="fa fa-minus"></i>
+                                    <i class="fa fa-trash-alt"></i>
                                 </button>
                             </a>
                             

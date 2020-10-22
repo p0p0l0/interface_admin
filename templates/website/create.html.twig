@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création/Edition website{% endblock %}
+{% block title %}{% trans %}Website creation/update{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="row d-flex justify-content-center my-2">
-        <h2>Création/Modification d'un site web</h2>
+        <h2>{% trans %}Website Creation/Update{% endtrans %}</h2>
     </div>
    
     <div class= "col-2">
         <a href=" {{path('website_list',{'customerId':customer.id})}}">
-            <button type="button" class="btn btn-primary">Retour à la liste</button>
+            <button type="button" class="btn btn-primary">{% trans %}Back to the website list{% endtrans %}</button>
         </a>
     </div>
 

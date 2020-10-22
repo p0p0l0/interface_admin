@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Clients{% endblock %}
+{% block title %}{% trans %}Customers{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="row d-flex justify-content-center">
-        <h2> Liste des clients</h2>
+        <h2>{% trans %}Customers List{% endtrans %}</h2>
     </div>
     
     {# Affichage bouton creation client#}
     <div> 
         <a href="{{path('customer_create')}}">
             <button type="button" class="btn btn-primary">
-                <i class="fa fa-plus"></i> Création d'un client
+                <i class="fa fa-plus"></i> {% trans %}Customer Creation{% endtrans %}
             </button>   
         </a>
     </div>
@@ -20,12 +20,12 @@
     <table class="table mt-2">
         <thead>
             <tr>
-                <th scope="col">Statut</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Mail</th>
-                <th scope="col">Telephone</th>
-                <th scope="col">Créateur</th>
-                <th scope="col">Date de création</th>
+                <th scope="col">{% trans %}Status{% endtrans %}</th>
+                <th scope="col">{% trans %}Name{% endtrans %}</th>
+                <th scope="col">E-Mail</th>
+                <th scope="col">{% trans %}Phone{% endtrans %}</th>
+                <th scope="col">{% trans %}User Creation{% endtrans %}</th>
+                <th scope="col">{% trans %}CreatedAt{% endtrans %}</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>

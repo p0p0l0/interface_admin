@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/customer", name ="customer_")
@@ -35,7 +36,7 @@ class CustomerController extends AbstractController
      * @Route("/create", name="create")
      */
     //création d'un customer ds la bdd
-    public function create(EntityManagerInterface $em, Request $request){
+    public function create(EntityManagerInterface $em, Request $request,TranslatorInterface $translator){
         
         $customer = new Customer();
 
@@ -50,7 +51,7 @@ class CustomerController extends AbstractController
             $em->flush();
 
             $this->addFlash(
-                "success","Le client {$customer->getName()} a été ajouté avec succès"
+                "success",$customer->getName().$translator->trans(" added successfully ")
             );
 
             return $this->redirectToRoute('customer_update',[
@@ -66,14 +67,14 @@ class CustomerController extends AbstractController
      * @Route("/{customerId}/update", name="update", requirements={"customerId"= "\d+"})
      */
     //mise a jour d'un customer par rapport a son id en passant par le formulaire de creation
-    public function edit(EntityManagerInterface $em, Request $request, CustomerRepository $cr, $customerId){ 
+    public function edit(EntityManagerInterface $em, Request $request, CustomerRepository $cr, $customerId, TranslatorInterface $translator){ 
 
         $customer = $cr->find($customerId);
 
         if(empty($customer)){ 
 
             $this->addFlash(
-                "warning","Le client n'existe pas."
+                "warning",$translator->trans("The customer doesn't exist")
             );
 
             return $this->redirectToRoute('customer_list');
@@ -88,7 +89,7 @@ class CustomerController extends AbstractController
             $em->flush();
             
             $this->addFlash(
-                "success","Le client {$customer->getName()} a été édité avec succès"
+                "success",$customer->getName().$translator->trans(" edited successfully")
             );
 
             return $this->redirectToRoute('customer_update',[
@@ -107,13 +108,13 @@ class CustomerController extends AbstractController
      * @Route("/{customerId}/delete", name="delete", requirements={"customerId"= "\d+"})
      */
     //supprime un customer par rapport a son id
-    public function delete(EntityManagerInterface $em, CustomerRepository $cr, $customerId){
+    public function delete(EntityManagerInterface $em, CustomerRepository $cr, $customerId, TranslatorInterface $translator){
         
         $deleteCustomer = $cr->find($customerId);
 
         if(empty($deleteCustomer)){ 
             $this->addFlash(
-                "warning","Le client n'existe pas."
+                "warning",$translator->trans("The customer doesn't exist")
             );
             return $this->redirectToRoute('customer_list');
         }
@@ -123,13 +124,13 @@ class CustomerController extends AbstractController
             $em->flush();
             
             $this->addFlash(
-                "success","Le client {$deleteCustomer->getName()} a été supprimé avec succès"
+                "success", $deleteCustomer->getName().$translator->trans(" deleted successfully")
             );
             return $this->redirectToRoute('customer_list');
         }catch(ForeignKeyConstraintViolationException $e){
 
             $this->addFlash(
-                "warning","Le client ne peut etre supprimé. Il possède toujours des sites web"
+                "warning", $deleteCustomer->getName().$translator->trans(" cannot be deleted. Customer still has websites")
             );
 
             return $this->redirectToRoute('customer_list'); 

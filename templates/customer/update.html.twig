@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mise à jour du client{% endblock %}
+{% block title %}{% trans %}Update Customer{% endtrans %}{% endblock %}
 
 {% block body %}
   <div class="row d-flex justify-content-center">
-    <h2>Mise à jour de {{customer.name}}</h2>
+    <h2>{% trans %}Update to {% endtrans %} {{customer.name}}</h2>
   </div>
 
   {# Navbar Tab#}
   <ul class="nav nav-tabs">
     {# Redirige vers update clients #}
     <li class="nav-item">
-      <a class="nav-link active" href="{{ path('customer_update',{'customerId':customer.id})}}">Info Client</a>
+      <a class="nav-link active" href="{{ path('customer_update',{'customerId':customer.id})}}">{% trans %}Customer Info{% endtrans %}</a>
     </li>
 
     {# Redirige vers les sites web du client#}
     <li class="nav-item">
-      <a class="nav-link" href="{{ path('website_list',{'customerId':customer.id})}}">Website</a>
+      <a class="nav-link" href="{{ path('website_list',{'customerId':customer.id})}}">{% trans %}Website{% endtrans %}</a>
     </li>
   </ul>
 
   {# Bouton retour vers la liste clients#}
   <div class= "d-flex justify-content-end  mt-3">
     <a href=" {{path('customer_list')}}">
-      <button type="button" class="btn btn-primary">Retour à la liste des clients
+      <button type="button" class="btn btn-primary">{% trans %}Back to the clients list {% endtrans %}
       </button>
     </a>
   </div>

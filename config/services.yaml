@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
 
+    app.locales: [en, fr]
+    
 services:
     # default configuration for services in *this* file
     _defaults:

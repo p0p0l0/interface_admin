@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="g83SZh3" resname="Customer Creation">
+        <source>Customer Creation</source>
+        <target>Creation du client</target>
+      </trans-unit>
+      <trans-unit id="_wfcYSu" resname="Back to the clients list">
+        <source>Back to the clients list</source>
+        <target>Retour à la liste clients</target>
+      </trans-unit>
+      <trans-unit id="RGkuIq_" resname="The customer doesn't exist">
+        <source>The customer doesn't exist</source>
+        <target>Le client n'existe pas</target>
+      </trans-unit>
+      <trans-unit id="BXMHDV5" resname="Customer ">
+        <source>Customer </source>
+        <target>Client </target>
+      </trans-unit>
+      <trans-unit id="qr528fT" resname="Customers">
+        <source>Customers</source>
+        <target>Clients</target>
+      </trans-unit>
+      <trans-unit id="GROigaa" resname="Disconnection">
+        <source>Disconnection</source>
+        <target>Déconnexion</target>
+      </trans-unit>
+      <trans-unit id="MkPwe43" resname="Customers List">
+        <source>Customers List</source>
+        <target>Liste des clients</target>
+      </trans-unit>
+      <trans-unit id="kg5BPH1" resname="Status">
+        <source>Status</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="3NHVIj9" resname="Name">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="Y9zriAC" resname="Phone">
+        <source>Phone</source>
+        <target>Téléphone</target>
+      </trans-unit>
+      <trans-unit id="COatVdZ" resname="User Creation">
+        <source>User Creation</source>
+        <target>Créateur</target>
+      </trans-unit>
+      <trans-unit id="_NU_9fk" resname="CreatedAt">
+        <source>CreatedAt</source>
+        <target>Date de création</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="D1xRLHd" resname="Hello!!!">
+        <source>Hello!!!</source>
+        <target>Bonjour!!!</target>
+      </trans-unit>
+      <trans-unit id="UCkB2db" resname="Welcome !!!">
+        <source>Welcome !!!</source>
+        <target>Bienvenue !!!</target>
+      </trans-unit>
+      <trans-unit id="47ienTP" resname="Username">
+        <source>Username</source>
+        <target>Nom d'utilisateur</target>
+      </trans-unit>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="9fC3APF" resname="Website creation/update">
+        <source>Website creation/update</source>
+        <target>creation/modification site web</target>
+      </trans-unit>
+      <trans-unit id="8BxhSkW" resname="Website Creation/Update">
+        <source>Website Creation/Update</source>
+        <target>Création/Mise à jour du site web</target>
+      </trans-unit>
+      <trans-unit id="TcLLDSA" resname="Back to the website list">
+        <source>Back to the website list</source>
+        <target>Retour vers la liste des sites web</target>
+      </trans-unit>
+      <trans-unit id="KlW2bod" resname="Website List">
+        <source>Website List</source>
+        <target>Liste des sites web</target>
+      </trans-unit>
+      <trans-unit id="Q.wSim3" resname="Customer Info">
+        <source>Customer Info</source>
+        <target>Info Client</target>
+      </trans-unit>
+      <trans-unit id="4QkLsrt" resname="Website Creation">
+        <source>Website Creation</source>
+        <target>Création du site web</target>
+      </trans-unit>
+      <trans-unit id="SefkAvS" resname="IP Server">
+        <source>IP Server</source>
+        <target>Serveur Ip</target>
+      </trans-unit>
+      <trans-unit id="Z6VFTPp" resname="Folder Name">
+        <source>Folder Name</source>
+        <target>Nom du dossier</target>
+      </trans-unit>
+      <trans-unit id="DgePIxT" resname="Folder Path">
+        <source>Folder Path</source>
+        <target>Chemin du dossier</target>
+      </trans-unit>
+      <trans-unit id="aR5qqZz" resname="Update Customer">
+        <source>Update Customer</source>
+        <target>Mise à jour client</target>
+      </trans-unit>
+      <trans-unit id="4b13Ga7" resname="Update to">
+        <source>Update to</source>
+        <target>Mise à jour de </target>
+      </trans-unit>
+      <trans-unit id="taIprIv" resname="Website">
+        <source>Website</source>
+        <target>Site web</target>
+      </trans-unit>
+      <trans-unit id="TYppSZ0" resname="added successfully ">
+        <source>added successfully </source>
+        <target> est ajouté avec succès</target>
+      </trans-unit>
+      <trans-unit id="dpfikID" resname=" added successfully ">
+        <source> added successfully </source>
+        <target> est ajouté avec succès</target>
+      </trans-unit>
+      <trans-unit id="68KiQgv" resname=" edited successfully">
+        <source> edited successfully</source>
+        <target> est édité avec succès</target>
+      </trans-unit>
+      <trans-unit id="TSR41G2" resname=" deleted successfully">
+        <source> deleted successfully</source>
+        <target> est supprimé avec succès</target>
+      </trans-unit>
+      <trans-unit id="ex84Fxr" resname=" cannot be deleted. Customer still has websites">
+        <source> cannot be deleted. Customer still has websites</source>
+        <target> ne peut pas ^tre supprimé. Le client a toujours des sites web</target>
+      </trans-unit>
+      <trans-unit id="pJHb3nf" resname=" added successfully">
+        <source> added successfully</source>
+        <target> est ajouté avec succès</target>
+      </trans-unit>
+      <trans-unit id="zAxg7Lo" resname=" The website doesn't exist">
+        <source> The website doesn't exist</source>
+        <target> Le site web n'existe pas</target>
+      </trans-unit>
+      <trans-unit id="pKBN4yA" resname="The website doesn't exist">
+        <source>The website doesn't exist</source>
+        <target>Le site web n'existe pas</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
