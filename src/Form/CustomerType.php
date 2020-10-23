@@ -15,15 +15,14 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class CustomerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $choices =[ 'Test'=> 'Test',
-                    'Formation'=>'Formation',
-                    'Production'=>'Production',
-                    'Fermé'=>'Ferme'];
+    {             
         $builder
             ->add('status',ChoiceType::class,[
                 'label'=>'Statut', 
-                'choices'=>$choices,
+                'choices'=>['Test'=> 'Test',
+                            'Formation'=>'Formation',
+                            'Production'=>'Production',
+                            'Fermé'=>'Ferme'],
                 'expanded'=> true,
                 'label_attr'=>[
                     'class'=>'radio-inline'
