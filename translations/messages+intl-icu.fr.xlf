@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="ex84Fxr" resname=" cannot be deleted. Customer still has websites">
         <source> cannot be deleted. Customer still has websites</source>
-        <target> ne peut pas ^tre supprimé. Le client a toujours des sites web</target>
+        <target> ne peut pas être supprimé. Le client a toujours des sites web</target>
       </trans-unit>
       <trans-unit id="pJHb3nf" resname=" added successfully">
         <source> added successfully</source>
