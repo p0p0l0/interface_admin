@@ -18,5 +18,6 @@ class MainController extends AbstractController
         $request->getSession()->set('_locale',$locale);
 
         return $this->redirect($request->headers->get('referer'));
+        
     }
 }

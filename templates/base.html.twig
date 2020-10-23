@@ -30,20 +30,33 @@
                             <a class="nav-link" href="#"><strong>{{ app.user.username}}</strong></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('customer_list')}}">{% trans %}Customers {% endtrans %} </a>
+                            <a class="nav-link" href="{{path('customer_list')}}">{% trans %}Customers {% endtrans %}
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('security_logout')}}">{% trans %}Disconnection{% endtrans %}</a>
+                            <a class="nav-link"
+                                href="{{path('security_logout')}}">{% trans %}Disconnection{% endtrans %}</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
-                        {% for locale in locales  %}
-                            {% if locale != app.request.locale %}
-                                <li class="nav-item">
-                                    <a href=" {{ path('change_locale',{'locale' : locale}) }}" class="nav-link"><img src="{{ asset('img/'~locale~'.png') }}" alt="{{locale}}"></a>
-                                </li>
-                            {% endif %}   
-                        {% endfor %}  
+
+                        <li class=" nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% trans %}Languages{% endtrans %}
+                              </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% for locale in locales  %}
+                                {% if locale != app.request.locale %}
+                                <a href=" {{ path('change_locale',{'locale' : locale}) }}" class="nav-link"><img
+                                        src="{{ asset('img/'~locale~'.png') }}" alt="{{locale}}"></a>
+                                {% else %}
+                                <a href=" {{ path('change_locale',{'locale' : locale}) }}" class="nav-link"><img
+                                        src="{{ asset('img/'~locale~'.png') }}" alt="{{locale}}"></a>
+                                {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>

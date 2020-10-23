@@ -15,6 +15,12 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+
+        change_locale:
+            pattern: ^/change_locale
+            anonymous: true
+
+
         login: 
             pattern: ^/login$
             anonymous: true
@@ -23,7 +29,7 @@ security:
                 login_path: security_login
                 check_path: login_check
                 default_target_path: home
-
+                
         main:
             pattern: ^/
             
@@ -34,7 +40,7 @@ security:
                 login_path: security_login
                 check_path: login_check
                 default_target_path: home
-
+                
             logout:
                 path: security_logout
                 target: security_login

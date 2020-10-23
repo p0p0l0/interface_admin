@@ -121,10 +121,6 @@
         <source>Website</source>
         <target>Site web</target>
       </trans-unit>
-      <trans-unit id="TYppSZ0" resname="added successfully ">
-        <source>added successfully </source>
-        <target> est ajouté avec succès</target>
-      </trans-unit>
       <trans-unit id="dpfikID" resname=" added successfully ">
         <source> added successfully </source>
         <target> est ajouté avec succès</target>
@@ -152,6 +148,10 @@
       <trans-unit id="pKBN4yA" resname="The website doesn't exist">
         <source>The website doesn't exist</source>
         <target>Le site web n'existe pas</target>
+      </trans-unit>
+      <trans-unit id="MYZVzqS" resname="Languages">
+        <source>Languages</source>
+        <target>Langages</target>
       </trans-unit>
     </body>
   </file>
