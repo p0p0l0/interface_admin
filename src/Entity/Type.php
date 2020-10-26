@@ -49,6 +49,16 @@ class Type
      */
     private $path ='/var/www/';
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $serverName;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $command;
+
 
     public function getId(): ?int
     {
@@ -121,6 +131,30 @@ class Type
     public function setPath(string $path): self
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getServerName(): ?string
+    {
+        return $this->serverName;
+    }
+
+    public function setServerName(string $serverName): self
+    {
+        $this->serverName = $serverName;
+
+        return $this;
+    }
+
+    public function getCommand(): ?string
+    {
+        return $this->command;
+    }
+
+    public function setCommand(string $command): self
+    {
+        $this->command = $command;
 
         return $this;
     }

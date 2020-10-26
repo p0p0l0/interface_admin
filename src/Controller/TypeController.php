@@ -83,7 +83,7 @@ class TypeController extends AbstractController
                 $type->getName() . $translator->trans(" edited successfully")
             );
 
-            return $this->redirectToRoute('customer_create', [
+            return $this->redirectToRoute('type_create', [
                 'typeId' => $typeId
             ]);
         }
@@ -109,7 +109,7 @@ class TypeController extends AbstractController
                 "warning",
                 $translator->trans("The type doesn't exist")
             );
-            return $this->redirectToRoute('customer_list');
+            return $this->redirectToRoute('type_list');
         }
 
         $em->remove($type);

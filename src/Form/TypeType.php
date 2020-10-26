@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,11 +34,19 @@ class TypeType extends AbstractType
             ->add('username',TextType::class,[
                 'label'=>$this->translator->trans('Username')
             ])
-            ->add('password',PasswordType::class,[
+            ->add('password',TextType::class,[
                 'label'=>$this->translator->trans('Password')
             ])
             ->add('path',TextType::class,[
                 'label'=>$this->translator->trans('Path')
+            ])
+
+            ->add('serverName', TextType::class,[
+                'label'=>$this->translator->trans('Server Name')
+            ])
+
+            ->add('command', TextareaType::class,[
+                'label'=>$this->translator->trans('Command')
             ])
 
             ->add($this->translator->trans('Submit'),SubmitType::class)
