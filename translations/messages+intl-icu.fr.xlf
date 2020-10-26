@@ -25,8 +25,8 @@
         <source>Customers</source>
         <target>Clients</target>
       </trans-unit>
-      <trans-unit id="GROigaa" resname="Disconnection">
-        <source>Disconnection</source>
+      <trans-unit id="GROigaa" resname="Logout">
+        <source>Logout</source>
         <target>Déconnexion</target>
       </trans-unit>
       <trans-unit id="MkPwe43" resname="Customers List">

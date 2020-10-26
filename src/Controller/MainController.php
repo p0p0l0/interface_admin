@@ -14,10 +14,12 @@ class MainController extends AbstractController
      */
     public function changeLocale($locale, Request $request)
     {
+        if (empty($request->headers->get('referer'))) {
+            return $this->redirectToRoute('security_login');
+        } else {
+            $request->getSession()->set('_locale', $locale);
 
-        $request->getSession()->set('_locale',$locale);
-
-        return $this->redirect($request->headers->get('referer'));
-        
+            return $this->redirect($request->headers->get('referer'));
+        }
     }
 }
