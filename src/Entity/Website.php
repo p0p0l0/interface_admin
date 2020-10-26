@@ -41,17 +41,12 @@ class Website
     private $nameFolder;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $pathFolder;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="websites")
+     * @ORM\ManyToOne(targetEntity=Customer::class)
      */
     private $customer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="Websites")
+     * @ORM\ManyToOne(targetEntity=Type::class)
      */
     private $type;
 
@@ -110,21 +105,6 @@ class Website
         return $this;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function setIpServeurValue()
-    {
-        $this->ipServeur = "140.40.40.40";
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setNameFolderValue()
-    {
-        $this->nameFolder = "le nom du dossier";
-    }
 
     public function getType(): ?Type
     {

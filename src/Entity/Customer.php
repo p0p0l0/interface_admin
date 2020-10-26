@@ -61,19 +61,10 @@ class Customer
     private $userEdit;
 
     /**
-     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="customer")
-     */
-    private $websites;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $status = 'Test';
 
-    public function __construct()
-    {
-        $this->websites = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -160,37 +151,6 @@ class Customer
     public function setUserEdit(?string $userEdit): self
     {
         $this->userEdit = $userEdit;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Website[]
-     */
-    public function getWebsites(): Collection
-    {
-        return $this->websites;
-    }
-
-    public function addWebsite(Website $website): self
-    {
-        if (!$this->websites->contains($website)) {
-            $this->websites[] = $website;
-            $website->setCustomer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeWebsite(Website $website): self
-    {
-        if ($this->websites->contains($website)) {
-            $this->websites->removeElement($website);
-            // set the owning side to null (unless already changed)
-            if ($website->getCustomer() === $this) {
-                $website->setCustomer(null);
-            }
-        }
 
         return $this;
     }

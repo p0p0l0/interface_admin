@@ -31,9 +31,9 @@
             
             {% for type in types %}
                 <tr>
-                    <td>{{ Type.IpServer }}</td> 
-                    <td>{{ Type.path }}</td>
-                    <td>{{ Type.name}}</td>
+                    <td>{{ type.IpServer }}</td> 
+                    <td>{{ type.path }}</td>
+                    <td>{{ type.name}}</td>
                     <td>  
                         {# Bouton update #}  
                         <a href="{{ path('type_update',{'typeId': type.id}) }}">
@@ -44,7 +44,7 @@
                         &nbsp;
 
                         {# Bouton delete #}
-                        <a href="{{ path('customer_delete',{'typeId' : type.id}) }}">
+                        <a href="{{ path('type_delete',{'typeId' : type.id}) }}">
                             <button type="button" class="btn btn-outline-danger">
                                 <i class="fa fa-trash-alt"></i>
                             </button>

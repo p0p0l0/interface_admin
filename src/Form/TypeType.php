@@ -4,11 +4,13 @@ namespace App\Form;
 
 use App\Entity\Type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class TypeType extends AbstractType
 {
@@ -20,17 +22,26 @@ class TypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('IpServer', TextType::class,[
+            ->add('name',TextType::class,[
+                'label'=>$this->translator->trans('Name')
+            ])
+            ->add('IpServer',TextType::class,[
                 'label'=>$this->translator->trans('Ip Server')
+            ])
+            ->add('port',NumberType::class)
+
+            ->add('username',TextType::class,[
+                'label'=>$this->translator->trans('Username')
+            ])
+            ->add('password',PasswordType::class,[
+                'label'=>$this->translator->trans('Password')
             ])
             ->add('path',TextType::class,[
                 'label'=>$this->translator->trans('Path')
             ])
-            ->add('name', TextType::class,[
-                'label'=>$this->translator->trans('Name')
-            ])
 
-            ->add($this->translator->trans('submit'), SubmitType::class)
+            ->add($this->translator->trans('Submit'),SubmitType::class)
+            
         ;
     }
 
