@@ -15,29 +15,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/customer/{customerId}/website", name="website_", requirements = {"customerId" = "\d+"})
+ * @Route("/website", name="website_")
  */
 class WebsiteController extends AbstractController
 {
     /**
      * @Route("/list", name="list")
      */
-    public function index(EntityManagerInterface $em, CustomerRepository $cr,WebsiteRepository $wr, $customerId, TranslatorInterface $translator)
+    public function index(EntityManagerInterface $em,WebsiteRepository $wr, TranslatorInterface $translator)
     {
-        $customer = $cr->find($customerId);
-
-        if(empty($customer)){ 
-            $this->addFlash(
-                "warning",$translator->trans("The customer doesn't exist")
-            );
-            return $this->redirectToRoute('customer_list');
-        }
-
         $websites = $wr->findAll();
 
         return $this->render('website/index.html.twig',[
-            'websites'=>$websites,
-            'customer'=>$customer
+            'websites'=>$websites
         ]);
     }
 

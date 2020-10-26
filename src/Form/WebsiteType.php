@@ -21,13 +21,7 @@ class WebsiteType extends AbstractType
             ->add('url',UrlType::class,[
                 'label'=>'URL'
             ])
-            ->add('ipServeur',TextType::class,[
-                'label'=>'Adresse du serveur',
-                'disabled'=>'disabled',
-                'attr'=>[
-                    'placeholder'=>'140.10.10.10'
-                ]
-            ])
+            
             ->add('nameFolder', TextType::class,[
                 'label'=>'Nom du dossier',
                 'disabled'=>'disabled',
@@ -35,10 +29,7 @@ class WebsiteType extends AbstractType
                     'placeholder'=>'Le nom du fichier'
                 ]
             ])
-            
-            ->add('pathFolder',TextType::class,[
-                'label'=>'Chemin du dossier'
-            ])
+           
             ->add('valider',SubmitType::class)
         ;
     }

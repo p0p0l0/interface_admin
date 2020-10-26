@@ -37,11 +37,7 @@ class Website
      * @ORM\Column(type="string", length=255)
      * @Assert\Ip
      */
-    private $ipServeur;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    
     private $nameFolder;
 
     /**
@@ -53,6 +49,11 @@ class Website
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="websites")
      */
     private $customer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="Websites")
+     */
+    private $type;
 
 
     public function getId(): ?int
@@ -84,18 +85,6 @@ class Website
         return $this;
     }
 
-    public function getIpServeur(): ?string
-    {
-        return $this->ipServeur;
-    }
-
-    public function setIpServeur(string $ipServeur): self
-    {
-        $this->ipServeur = $ipServeur;
-
-        return $this;
-    }
-
     public function getNameFolder(): ?string
     {
         return $this->nameFolder;
@@ -108,17 +97,6 @@ class Website
         return $this;
     }
 
-    public function getPathFolder(): ?string
-    {
-        return $this->pathFolder;
-    }
-
-    public function setPathFolder(string $pathFolder): self
-    {
-        $this->pathFolder = $pathFolder;
-
-        return $this;
-    }
 
     public function getCustomer(): ?Customer
     {
@@ -146,6 +124,18 @@ class Website
     public function setNameFolderValue()
     {
         $this->nameFolder = "le nom du dossier";
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
+
+        return $this;
     }
 
     

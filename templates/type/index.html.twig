@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}Customers{% endtrans %}{% endblock %}
+{% block title %}{% trans %}Type{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="row d-flex justify-content-center">
-        <h2>{% trans %}Customers List{% endtrans %}</h2>
+        <h2>{% trans %}Type List{% endtrans %}</h2>
     </div>
     
     {# Affichage bouton creation client#}
     <div> 
-        <a href="{{path('customer_create')}}">
+        <a href="{{path('type_create')}}">
             <button type="button" class="btn btn-primary">
-                <i class="fa fa-plus"></i> {% trans %}Customer Creation{% endtrans %}
+                <i class="fa fa-plus"></i> {% trans %}Type Creation{% endtrans %}
             </button>   
         </a>
     </div>
@@ -20,27 +20,23 @@
     <table class="table mt-2">
         <thead>
             <tr>
-                <th scope="col">{% trans %}Status{% endtrans %}</th>
+                <th scope="col">{% trans %}Ip Server{% endtrans %}</th>
+                <th scope="col">{% trans %}Path{% endtrans %}</th>
                 <th scope="col">{% trans %}Name{% endtrans %}</th>
-                <th scope="col">E-Mail</th>
-                <th scope="col">{% trans %}User Creation{% endtrans %}</th>
-                <th scope="col">{% trans %}CreatedAt{% endtrans %}</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
 
         <tbody>
             
-            {% for customer in customers %}
+            {% for type in types %}
                 <tr>
-                    <td>{{ customer.status }}</td> 
-                    <td>{{ customer.name }}</td>
-                    <td>{{ customer.mail }}</td>
-                    <td>{{ customer.userCreation }}</td>
-                    <td>{{ customer.createdAt | date('d/m/Y H:i', 'Europe/Paris')}}</td>
+                    <td>{{ Type.IpServer }}</td> 
+                    <td>{{ Type.path }}</td>
+                    <td>{{ Type.name}}</td>
                     <td>  
                         {# Bouton update #}  
-                        <a href="{{ path('customer_update',{'customerId': customer.id}) }}">
+                        <a href="{{ path('type_update',{'typeId': type.id}) }}">
                             <button type="button" class="btn btn-outline-primary">
                                 <i class="fa fa-edit"></i>
                             </button>   
@@ -48,7 +44,7 @@
                         &nbsp;
 
                         {# Bouton delete #}
-                        <a href="{{ path('customer_delete',{'customerId' : customer.id}) }}">
+                        <a href="{{ path('customer_delete',{'typeId' : type.id}) }}">
                             <button type="button" class="btn btn-outline-danger">
                                 <i class="fa fa-trash-alt"></i>
                             </button>

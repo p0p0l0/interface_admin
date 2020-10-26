@@ -4,28 +4,18 @@
 
 {% block body %}
     <div class="row d-flex justify-content-center">
-        <h2> {{ customer.name }} </h2>
+        <h2> Websites List </h2>
     </div>
 
-    <ul class="nav nav-tabs mb-2">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('customer_update',{'customerId':customer.id})}}">{% trans %}Customer Info{% endtrans %}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ path('website_list',{'customerId':customer.id})}}">Website</a>
-        </li>
-      </ul>
-
-
     <div class= "d-flex justify-content-between mt-5">
-        <a href="{{path('website_create',{'customerId':customer.id})}}">
+        <a href="#">
             <button type="button" class="btn btn-primary">
                 <i class="fa fa-plus"></i> {% trans %}Website Creation{% endtrans %}
             </button>   
         </a>
 
-        <a href=" {{path('customer_list')}}">
-            <button type="button" class="btn btn-primary">{% trans %}Back to the clients list{% endtrans %}</button>
+        <a href=" {{path('website_list')}}">
+            <button type="button" class="btn btn-primary">{% trans %}Back to the websites list{% endtrans %}</button>
         </a>
     </div>
 
@@ -35,7 +25,6 @@
                 <tr>    
                     <th scope="col">{% trans %}Name{% endtrans %}</th>
                     <th scope="col">Url</th>
-                    <th scope="col">{% trans %}IP Server{% endtrans %}</th>
                     <th scope="col">{% trans %}Folder Name{% endtrans %}</th>
                     <th scope="col">{% trans %}Folder Path{% endtrans %}</th>
                     <th scope="col">Actions</th>
@@ -43,15 +32,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for website in customer.websites %}
+                {% for website in websites %}
 
                     <tr>
                         <td>{{website.name}}</td>
                         <td>{{website.url}}</td>
-                        <td>{{website.ipServeur}}</td>
                         <td>{{website.nameFolder}}</td>
                         <td>{{website.pathFolder}}</td>
-                        <td>
+                       {# <td>
                             <a href="{{ path('website_update',{'customerId': customer.id, 'websiteId':website.id}) }}">
                                 <button type="button" class="btn btn-outline-primary">
                                     <i class="fa fa-edit"></i>
@@ -64,7 +52,7 @@
                                 </button>
                             </a>
                             
-                        </td>
+                        </td>#}
                     </tr>
 
                 {% endfor %}

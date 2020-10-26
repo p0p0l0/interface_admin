@@ -68,7 +68,7 @@ class Customer
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $status;
+    private $status = 'Test';
 
     public function __construct()
     {

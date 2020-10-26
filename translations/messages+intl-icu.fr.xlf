@@ -25,7 +25,7 @@
         <source>Customers</source>
         <target>Clients</target>
       </trans-unit>
-      <trans-unit id="GROigaa" resname="Logout">
+      <trans-unit id="0FJ_Sz1" resname="Logout">
         <source>Logout</source>
         <target>Déconnexion</target>
       </trans-unit>
@@ -152,6 +152,70 @@
       <trans-unit id="MYZVzqS" resname="Languages">
         <source>Languages</source>
         <target>Langages</target>
+      </trans-unit>
+      <trans-unit id="Uy6qvZV" resname="Test">
+        <source>Test</source>
+        <target>Test</target>
+      </trans-unit>
+      <trans-unit id="NqeY4.O" resname="Training">
+        <source>Training</source>
+        <target>Formation</target>
+      </trans-unit>
+      <trans-unit id="E6fGVaf" resname="Production">
+        <source>Production</source>
+        <target>Production</target>
+      </trans-unit>
+      <trans-unit id="wh6tBhT" resname="Closed">
+        <source>Closed</source>
+        <target>Fermé</target>
+      </trans-unit>
+      <trans-unit id="13uxeH_" resname="Ip Serverr">
+        <source>Ip Serverr</source>
+        <target>Serveur Ip</target>
+      </trans-unit>
+      <trans-unit id="YvpaWw0" resname="Path">
+        <source>Path</source>
+        <target>Chemin</target>
+      </trans-unit>
+      <trans-unit id="RU4X0ua" resname="The type doesn't exist">
+        <source>The type doesn't exist</source>
+        <target>Le type n'existe pas</target>
+      </trans-unit>
+      <trans-unit id="uq3fcPt" resname="Type">
+        <source>Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="9wZ4scl" resname="Customer Creation/Update">
+        <source>Customer Creation/Update</source>
+        <target>Création/Modification Client</target>
+      </trans-unit>
+      <trans-unit id="h3kh4O1" resname="Type Creation">
+        <source>Type Creation</source>
+        <target>Création du Type</target>
+      </trans-unit>
+      <trans-unit id="JiX9KnG" resname="Type Creation/Update">
+        <source>Type Creation/Update</source>
+        <target>Création/Modification du type</target>
+      </trans-unit>
+      <trans-unit id="JzxIVsy" resname="Back to the type list">
+        <source>Back to the type list</source>
+        <target>Retour à la liste des types</target>
+      </trans-unit>
+      <trans-unit id="uUhWJSl" resname="Back to the websites list">
+        <source>Back to the websites list</source>
+        <target>Retour à la liste des sites web</target>
+      </trans-unit>
+      <trans-unit id="YchS9Oc" resname="Ip Server">
+        <source>Ip Server</source>
+        <target>Serveur Ip</target>
+      </trans-unit>
+      <trans-unit id="dUkL17k" resname="submit">
+        <source>submit</source>
+        <target>valider</target>
+      </trans-unit>
+      <trans-unit id="s_Drgwm" resname="Type List">
+        <source>Type List</source>
+        <target>Liste de Types</target>
       </trans-unit>
     </body>
   </file>
