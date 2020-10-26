@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Website;
 use App\Entity\Customer;
 use App\Form\WebsiteType;
+use App\Repository\TypeRepository;
 use App\Repository\WebsiteRepository;
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,8 +23,9 @@ class WebsiteController extends AbstractController
     /**
      * @Route("/list", name="list")
      */
-    public function index(EntityManagerInterface $em,WebsiteRepository $wr, TranslatorInterface $translator)
+    public function index(EntityManagerInterface $em, WebsiteRepository $wr, TranslatorInterface $translator)
     {
+
         $websites = $wr->findAll();
 
         return $this->render('website/index.html.twig',[
@@ -32,74 +34,46 @@ class WebsiteController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="create", requirements = {"customerId" = "\d+"})
+     * @Route("/create", name="create")
      */
-    public function create(EntityManagerInterface $em, CustomerRepository $cr, Request $request, $customerId, TranslatorInterface $translator ){
+    public function create(EntityManagerInterface $em, Request $request, TranslatorInterface $translator ){
        
-        $customer = $cr->find($customerId);
-
-        if(empty($customer)){ 
-            $this->addFlash(
-                "warning",$translator->trans("The customer doesn't exist")
-            );
-            return $this->redirectToRoute('customer_list');
-        }
                
         $website = new Website();
        
         $form = $this->createForm(WebsiteType::class,$website);
         $form->handleRequest($request);
-        
-        $website->setCustomer($customer);
-            
+    
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($website);
             $em->flush();
 
             $this->addFlash(
-                "success",$website->getName().$translator->trans(" added successfully")
+                "success",$website->getServerName().$translator->trans(" added successfully")
             );
 
-            return $this->redirectToRoute('website_list',[
-                'customerId'=>$customerId
-            ]);
+            return $this->redirectToRoute('website_list');
         }
 
         return $this->render('website/create.html.twig',[
-            'form'=>$form->createView(),
-            'customer'=>$customer
+            'form'=>$form->createView()
         ]);
     }
 
 
     /**
-     * @Route("/{websiteId}/update", name="update", requirements={"customerId" = "\d+", "websiteId"="\d+"})
+     * @Route("/{websiteId}/update", name="update", requirements={"websiteId"="\d+"})
      */
     public function edit(EntityManagerInterface $em, Request $request, WebsiteRepository $wr, 
-                        CustomerRepository $cr, $customerId, $websiteId, TranslatorInterface $translator){
-        
-      
-        $customer = $cr->find($customerId);
+                        $websiteId, TranslatorInterface $translator){
 
-        if(empty($customer)){ 
-            $this->addFlash(
-                "warning",$translator->trans("The customer doesn't exist")
-            );
-            return $this->redirectToRoute('customer_list');
-        }
-
-        $website = $wr->findOneBy([
-            'customer'=>$customer,
-            'id'=>$websiteId
-             ]);
+        $website = $wr->findBy($websiteId);
         
-        if(empty($website)){ 
+        if(!$website){ 
             $this->addFlash(
                 "warning",$translator->trans(" The website doesn't exist")
             );
-            return $this->redirectToRoute('website_list',[
-                'customerId'=>$customerId
-            ]);
+            return $this->redirectToRoute('website_list');
         }
 
 
@@ -109,19 +83,15 @@ class WebsiteController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em->flush();
 
-            $this->addFlash(
-                "success",$website->getName().$translator->trans(" edited successfully")
-            );
+           $this->addFlash(
+               "success", $website->getServerName().$translator->trans( "edited succesfully")
+           );
 
-            return $this->redirectToRoute('website_list',[
-                'customerId'=>$customerId
-            ]);
+            return $this->redirectToRoute('website_list');
         }
 
         return $this->render('website/create.html.twig',[
-            'form'=>$form->createView(),
-            'customer'=>$customer
-
+            'form'=>$form->createView()
         ]);
     }
 
@@ -159,7 +129,7 @@ class WebsiteController extends AbstractController
         $em->flush();
 
         $this->addFlash(
-            "success",$deleteWebsite->getName().$translator->trans(" deleted successfully")
+            "success",$deleteWebsite->getServerName().$translator->trans(" deleted successfully")
         );
 
         return $this->redirectToRoute('website_list',[

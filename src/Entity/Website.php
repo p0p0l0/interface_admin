@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=WebsiteRepository::class)
- * @UniqueEntity("name", message="Un site web existe déjà avec ce nom")
+ * @UniqueEntity("serverName", message="Un site web existe déjà avec ce nom")
  * @ORM\HasLifecycleCallbacks()
  */
 class Website
@@ -25,19 +25,11 @@ class Website
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $serverName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Url
      */
-    private $url;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Ip
-     */
-    
     private $nameFolder;
 
     /**
@@ -50,32 +42,25 @@ class Website
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getServerName(): ?string
     {
-        return $this->name;
+        return $this->serverName;
     }
 
-    public function setName(string $name): self
+    public function setServerName(string $serverName): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
+        $this->serverName = $serverName;
 
         return $this;
     }
@@ -114,6 +99,18 @@ class Website
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

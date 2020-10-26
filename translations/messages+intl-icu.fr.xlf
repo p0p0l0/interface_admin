@@ -217,6 +217,18 @@
         <source>Type List</source>
         <target>Liste de Types</target>
       </trans-unit>
+      <trans-unit id="vEgWQl6" resname="Server Name">
+        <source>Server Name</source>
+        <target>Nom serveur</target>
+      </trans-unit>
+      <trans-unit id="cTFmlx1" resname="Command">
+        <source>Command</source>
+        <target>Commande</target>
+      </trans-unit>
+      <trans-unit id="FV_BbAQ" resname="Submit">
+        <source>Submit</source>
+        <target>Valider</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
