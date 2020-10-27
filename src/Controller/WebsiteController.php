@@ -103,9 +103,11 @@ class WebsiteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             foreach ($websites as $verifWebsite) {
 
-                if ($website->getType() != $verifType && $verifWebsite->getCustomer() == $website->getCustomer() && $verifWebsite->getType() == $website->getType() && $website != $verifWebsite) {
+                if ($website->getType() != $verifType && $verifWebsite->getCustomer() == $website->getCustomer() && 
+                    $verifWebsite->getType() == $website->getType() && $website != $verifWebsite) {
                     $this->addFlash(
                         "warning",
                         $translator->trans("The customer cannot have such a website")
