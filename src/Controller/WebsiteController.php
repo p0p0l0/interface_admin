@@ -86,10 +86,8 @@ class WebsiteController extends AbstractController
         TranslatorInterface $translator
     ) {
 
-        $website = $wr->find($websiteId);
-        $verifCustomer = $website->getCustomer();
-        $verifType = $website->getType();
 
+        $website = $wr->find($websiteId);
         if (!$website) {
             $this->addFlash(
                 "warning",
@@ -97,6 +95,9 @@ class WebsiteController extends AbstractController
             );
             return $this->redirectToRoute('website_list');
         }
+        
+        $verifCustomer = $website->getCustomer();
+        $verifType = $website->getType();
 
         $form = $this->createForm(WebsiteType::class, $website);
         $form->handleRequest($request);
