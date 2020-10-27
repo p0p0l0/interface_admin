@@ -95,7 +95,7 @@ class WebsiteController extends AbstractController
             );
             return $this->redirectToRoute('website_list');
         }
-        
+        $websites = $wr->findAll();
         $verifCustomer = $website->getCustomer();
         $verifType = $website->getType();
 
@@ -103,16 +103,18 @@ class WebsiteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($website->getType() != $verifType) {
-                $this->addFlash(
-                    "warning",
-                    $translator->trans("The customer cannot have such a website")
-                );
-                return $this->redirectToRoute('website_update', [
-                    'websiteId' => $websiteId
-                ]);
-            }
+            foreach ($websites as $verifWebsite) {
 
+                if ($website->getType() != $verifType && $verifWebsite->getCustomer() == $website->getCustomer() && $verifWebsite->getType() == $website->getType() && $website != $verifWebsite) {
+                    $this->addFlash(
+                        "warning",
+                        $translator->trans("The customer cannot have such a website")
+                    );
+                    return $this->redirectToRoute('website_update', [
+                        'websiteId' => $websiteId
+                    ]);
+                }
+            }
 
             if ($verifCustomer != $website->getCustomer()) {
                 $this->addFlash(
