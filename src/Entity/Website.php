@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=WebsiteRepository::class)
- * @UniqueEntity("serverName", message="Un site web existe déjà avec ce nom")
+ * @UniqueEntity("serverName")
  * @ORM\HasLifecycleCallbacks()
  */
 class Website
@@ -115,5 +115,11 @@ class Website
         return $this;
     }
 
+    /**
+     * @ORM\PreFlush
+     */
+    public function setNameFolderValue(){
+        $this->nameFolder = $this->serverName.'.'.$this->type->getServerName();
+    }
     
 }

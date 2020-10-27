@@ -12,28 +12,34 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class WebsiteType extends AbstractType
 {
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
              ->add('type', EntityType::class,[
                 'class'=>Type::class,
-                'choice_label'=>'name'
+                'choice_label'=>'serverName'
             ] )
 
             ->add('customer',EntityType::class,[
                 'class'=>Customer::class,
-                'choice_label'=>'name'
+                'choice_label'=>'name',
+                'label'=>$this->translator->trans('Customer')
             ])
 
             ->add('serverName', TextType::class,[
                 'label'=>'Server name'
             ])
-            ->add('nameFolder', TextType::class,[
-                'label'=> 'Folder name'
-            ])
+            
             ->add('status', ChoiceType::class,[
                 'label'=>'Status',
                 'choices'=>['Active'=>'Active',

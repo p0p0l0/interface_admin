@@ -187,7 +187,7 @@
       </trans-unit>
       <trans-unit id="9wZ4scl" resname="Customer Creation/Update">
         <source>Customer Creation/Update</source>
-        <target>Création/Modification Client</target>
+        <target>Création/Modification du client</target>
       </trans-unit>
       <trans-unit id="h3kh4O1" resname="Type Creation">
         <source>Type Creation</source>
@@ -228,6 +228,34 @@
       <trans-unit id="FV_BbAQ" resname="Submit">
         <source>Submit</source>
         <target>Valider</target>
+      </trans-unit>
+      <trans-unit id="vzdjODq" resname="Customer">
+        <source>Customer</source>
+        <target>Client</target>
+      </trans-unit>
+      <trans-unit id="4JjPXz3" resname=" edited succesfully">
+        <source> edited succesfully</source>
+        <target> édité avec succès</target>
+      </trans-unit>
+      <trans-unit id="Ibq.7Ww" resname="Server name">
+        <source>Server name</source>
+        <target>Nom du serveur</target>
+      </trans-unit>
+      <trans-unit id="FNNO31D" resname="Folder name">
+        <source>Folder name</source>
+        <target>Nom du dossier</target>
+      </trans-unit>
+      <trans-unit id="T6gZgQw" resname="The customer cannot have such a website">
+        <source>The customer cannot have such a website</source>
+        <target>Le client ne peut pas avoir de site web de ce type</target>
+      </trans-unit>
+      <trans-unit id="wbqBeC7" resname="The customer cannot be changed">
+        <source>The customer cannot be changed</source>
+        <target>Le client ne peux être changé</target>
+      </trans-unit>
+      <trans-unit id="qv8a8MF" resname="Websites List">
+        <source>Websites List</source>
+        <target>Liste des sites web</target>
       </trans-unit>
     </body>
   </file>
