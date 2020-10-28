@@ -9,6 +9,7 @@ use App\Form\WebsiteType;
 use App\Repository\TypeRepository;
 use App\Repository\WebsiteRepository;
 use App\Repository\CustomerRepository;
+use App\Service\WebsiteService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,7 +37,7 @@ class WebsiteController extends AbstractController
     /**
      * @Route("/create", name="create")
      */
-    public function create(EntityManagerInterface $em, Request $request, TranslatorInterface $translator, WebsiteRepository $wr)
+    public function create(EntityManagerInterface $em, Request $request, TranslatorInterface $translator, WebsiteRepository $wr, WebsiteService $ws)
     {
 
 
@@ -49,18 +50,28 @@ class WebsiteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if(empty($website->getCustomer())){
+                $this->addFlash(
+                    "warning",
+                    "A customer must be selected"
+                );
+                return $this->redirectToRoute('website_create');
+            }
+
             $verifType = $wr->findOneBy(['customer' => $website->getCustomer(), 'type' => $website->getType()]);
             if (isset($verifType)) {
                 $this->addFlash(
                     "warning",
-                    "Le client ne peut pas avoir de site web de ce type"
+                    $translator->trans("The customer cannot have such a website")
                 );
                 return $this->redirectToRoute('website_list');
             }
-
+            
             $em->persist($website);
             $em->flush();
-
+            
+            $ws->createWebsite($website);
+            
             $this->addFlash(
                 "success",
                 $website->getServerName() . $translator->trans(" added successfully")
@@ -83,8 +94,10 @@ class WebsiteController extends AbstractController
         Request $request,
         WebsiteRepository $wr,
         $websiteId,
-        TranslatorInterface $translator
-    ) {
+        TranslatorInterface $translator,
+        WebsiteService $ws
+    ) 
+    {
 
 
         $website = $wr->find($websiteId);
@@ -98,26 +111,23 @@ class WebsiteController extends AbstractController
         $websites = $wr->findAll();
         $verifCustomer = $website->getCustomer();
         $verifType = $website->getType();
+        $nameFolder = $website->getNameFolder();
 
         $form = $this->createForm(WebsiteType::class, $website);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            foreach ($websites as $verifWebsite) {
 
-                if ($website->getType() != $verifType && $verifWebsite->getCustomer() == $website->getCustomer() && 
-                    $verifWebsite->getType() == $website->getType() && $website != $verifWebsite) {
-                    $this->addFlash(
-                        "warning",
-                        $translator->trans("The customer cannot have such a website")
-                    );
-                    return $this->redirectToRoute('website_update', [
-                        'websiteId' => $websiteId
-                    ]);
-                }
+            if ($website->getType() != $verifType) {
+                $this->addFlash(
+                    "warning",
+                    $translator->trans("The customer cannot have such a website")
+                );
+                return $this->redirectToRoute('website_update', [
+                    'websiteId' => $websiteId
+                ]);
             }
-
+        
             if ($verifCustomer != $website->getCustomer()) {
                 $this->addFlash(
                     "warning",
@@ -129,6 +139,8 @@ class WebsiteController extends AbstractController
             }
 
             $em->flush();
+
+            $ws->createWebsite($website);
 
             $this->addFlash(
                 "success",
@@ -150,12 +162,13 @@ class WebsiteController extends AbstractController
         EntityManagerInterface $em,
         WebsiteRepository $wr,
         $websiteId,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        WebsiteService $ws
     ) {
 
-        $deleteWebsite = $wr->find($websiteId);
-
-        if (empty($deleteWebsite)) {
+        $website = $wr->find($websiteId);
+        $nameFolder = $website->getNameFolder();
+        if (!$website) {
             $this->addFlash(
                 "warning",
                 $translator->trans("The website doesn't exist")
@@ -163,13 +176,14 @@ class WebsiteController extends AbstractController
             return $this->redirectToRoute('website_list');
         }
 
-
-        $em->remove($deleteWebsite);
+        $em->remove($website);
         $em->flush();
 
+        $ws->createWebsite($website);
+       
         $this->addFlash(
             "success",
-            $deleteWebsite->getServerName() . $translator->trans(" deleted successfully")
+            $website->getServerName() . $translator->trans(" deleted successfully")
         );
 
         return $this->redirectToRoute('website_list');

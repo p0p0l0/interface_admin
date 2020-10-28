@@ -45,10 +45,6 @@ class TypeType extends AbstractType
                 'label'=>$this->translator->trans('Server Name')
             ])
 
-            ->add('command', TextareaType::class,[
-                'label'=>$this->translator->trans('Command')
-            ])
-
             ->add($this->translator->trans('Submit'),SubmitType::class)
             
         ;

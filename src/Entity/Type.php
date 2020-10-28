@@ -5,9 +5,13 @@ namespace App\Entity;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=TypeRepository::class)
+ * @UniqueEntity("name")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Type
 {
@@ -55,9 +59,24 @@ class Type
     private $serverName;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
-    private $command;
+    private $scriptCreate;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $scriptMaj;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $scriptDelete;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $scriptUpdate;
 
 
     public function getId(): ?int
@@ -147,16 +166,84 @@ class Type
         return $this;
     }
 
-    public function getCommand(): ?string
+    public function getScriptCreate(): ?string
     {
-        return $this->command;
+        return $this->scriptCreate;
     }
 
-    public function setCommand(string $command): self
+    public function setScriptCreate(string $scriptCreate): self
     {
-        $this->command = $command;
+        $this->scriptCreate = $scriptCreate;
 
         return $this;
+    }
+
+    public function getScriptMaj(): ?string
+    {
+        return $this->scriptMaj;
+    }
+
+    public function setScriptMaj(string $scriptMaj): self
+    {
+        $this->scriptMaj = $scriptMaj;
+
+        return $this;
+    }
+
+    public function getScriptDelete(): ?string
+    {
+        return $this->scriptDelete;
+    }
+
+    public function setScriptDelete(string $scriptDelete): self
+    {
+        $this->scriptDelete = $scriptDelete;
+
+        return $this;
+    }
+
+    public function getScriptUpdate(): ?string
+    {
+        return $this->scriptUpdate;
+    }
+
+    public function setScriptUpdate(string $scriptUpdate): self
+    {
+        $this->scriptUpdate = $scriptUpdate;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setScriptCreateValue()
+    {
+        $this->scriptCreate = "install-".mb_strtolower($this->getName()).".sh";
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setScriptUpdateValue()
+    {
+        $this->scriptUpdate = "update-".mb_strtolower($this->getName()).".sh";
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setScriptMajValue()
+    {
+        $this->scriptMaj = "maj-".mb_strtolower($this->getName()).".sh";
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setScriptDeleteValue()
+    {
+        $this->scriptDelete = "delete-".mb_strtolower($this->getName()).".sh";
     }
 
 }

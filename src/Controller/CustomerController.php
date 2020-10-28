@@ -54,7 +54,7 @@ class CustomerController extends AbstractController
                 $customer->getName() . $translator->trans(" added successfully ")
             );
 
-            return $this->redirectToRoute('customer_create', [
+            return $this->redirectToRoute('customer_update', [
                 'customerId' => $customer->getId()
             ]);
         }

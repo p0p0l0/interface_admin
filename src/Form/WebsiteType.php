@@ -42,8 +42,8 @@ class WebsiteType extends AbstractType
             
             ->add('status', ChoiceType::class,[
                 'label'=>'Status',
-                'choices'=>['Active'=>'Active',
-                            'Inactive'=>'Inactive'],
+                'choices'=>[$this->translator->trans('Active')=>$this->translator->trans('Active'),
+                            $this->translator->trans('Inactive')=>$this->translator->trans('Inactive')],
                 'expanded'=> true,
                 'label_attr'=>['class'=>'radio-inline']
             ])

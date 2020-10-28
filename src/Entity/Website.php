@@ -45,7 +45,7 @@ class Website
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $status;
+    private $status ='Active';
 
 
     public function getId(): ?int

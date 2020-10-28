@@ -17,9 +17,8 @@ class TypeFixtures extends Fixture
                     ->setIpServer('147.135.162.109')
                     ->setUsername('interface')
                     ->setPassword('9w4hZ9Ke7D')
-                    ->setPath('/var/www/')
+                    ->setPath('/home/interface/www/')
                     ->setServerName('winsales.biz')
-                    ->setCommand('mkdir winsales.biz')
                     ;
         $manager->persist($typeWinSales);
 
@@ -30,7 +29,6 @@ class TypeFixtures extends Fixture
                 ->setPassword('9w4hZ9Ke7D')
                 ->setPath('/var/www/WinMam')
                 ->setServerName('winmam.cloud')
-                ->setCommand('mkdir winmam.cloud')
                 ;
         $manager->persist($typeWinMam);
 

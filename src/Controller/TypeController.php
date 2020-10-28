@@ -111,6 +111,7 @@ class TypeController extends AbstractController
             );
             return $this->redirectToRoute('type_list');
         }
+        try {
 
         $em->remove($type);
         $em->flush();
@@ -120,5 +121,14 @@ class TypeController extends AbstractController
             $type->getName() . $translator->trans(" deleted successfully")
         );
         return $this->redirectToRoute('type_list');
-    }
+        } catch (ForeignKeyConstraintViolationException $e) {
+
+            $this->addFlash(
+                "warning",
+                $type->getName() . $translator->trans(" cannot be deleted. Type still has websites")
+            );
+
+            return $this->redirectToRoute('type_list');
+        }
+   }
 }

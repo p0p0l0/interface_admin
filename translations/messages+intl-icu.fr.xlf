@@ -257,6 +257,30 @@
         <source>Websites List</source>
         <target>Liste des sites web</target>
       </trans-unit>
+      <trans-unit id="kjQGlYm" resname="Active">
+        <source>Active</source>
+        <target>Actif</target>
+      </trans-unit>
+      <trans-unit id="rHyUnxI" resname="Inactive">
+        <source>Inactive</source>
+        <target>Inactif</target>
+      </trans-unit>
+      <trans-unit id="P4TovVL" resname=" cannot be deleted. Type still has websites">
+        <source> cannot be deleted. Type still has websites</source>
+        <target> ne peut pas être supprimé. Le type est toujours rattaché a des sites web</target>
+      </trans-unit>
+      <trans-unit id="pGmrTKT" resname="Page not found">
+        <source>Page not found</source>
+        <target>Page non trouvé</target>
+      </trans-unit>
+      <trans-unit id="r0FL2I2" resname="The requested page couldn't be located. Checkout for any URL misspelling or">
+        <source>The requested page couldn't be located. Checkout for any URL misspelling or</source>
+        <target>La page demandée n'a pas pu être localisée.  Checkout pour toute faute d'orthographe ou</target>
+      </trans-unit>
+      <trans-unit id="yBAbsaq" resname="return to the homepage">
+        <source>return to the homepage</source>
+        <target>Retour vers la page d'accueil</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
