@@ -273,13 +273,33 @@
         <source>Page not found</source>
         <target>Page non trouvé</target>
       </trans-unit>
-      <trans-unit id="r0FL2I2" resname="The requested page couldn't be located. Checkout for any URL misspelling or">
+      <trans-unit id="3qIXx4v" resname="The requested page couldn't be located. Checkout for any URL misspelling or">
         <source>The requested page couldn't be located. Checkout for any URL misspelling or</source>
         <target>La page demandée n'a pas pu être localisée.  Checkout pour toute faute d'orthographe ou</target>
       </trans-unit>
       <trans-unit id="yBAbsaq" resname="return to the homepage">
         <source>return to the homepage</source>
         <target>Retour vers la page d'accueil</target>
+      </trans-unit>
+      <trans-unit id="TkpOKDg" resname="Are you sure you want to delete the customer">
+        <source>Are you sure you want to delete the customer</source>
+        <target>Etes vous sur de vouloir supprimer le client</target>
+      </trans-unit>
+      <trans-unit id="fZ63rLE" resname="Close">
+        <source>Close</source>
+        <target>Fermer</target>
+      </trans-unit>
+      <trans-unit id="4tClSWj" resname="Delete">
+        <source>Delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="MUjMB4Z" resname="Are you sure you want to delete the type">
+        <source>Are you sure you want to delete the type</source>
+        <target>Etes vous sur de vouloir supprimer le type</target>
+      </trans-unit>
+      <trans-unit id="bGRztgV" resname="Are you sure you want to delete the website">
+        <source>Are you sure you want to delete the website</source>
+        <target>Etes vous sur de vouloir supprimer le site web</target>
       </trans-unit>
     </body>
   </file>

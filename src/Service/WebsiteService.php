@@ -9,12 +9,12 @@ class WebsiteService
 
     public function createWebsite(Website $website){
         
-        $command =("sudo chmod +x {$website->getType()->getPath()}{$website->getType()->getScriptCreate()} && {$website->getType()->getPath()}{$website->getType()->getScriptCreate()} {$website->getType()->getPath()} {$website->getServerName()} {$website->getNameFolder()}");            
-            $cnx = ssh2_connect("147.135.162.109",22);
-            ssh2_auth_password($cnx,"interface","9w4hZ9Ke7D");
-            $stream = ssh2_exec($cnx, $command);
-            stream_set_blocking($stream, true);
-
+        $command ="sudo chmod +x {$website->getType()->getPath()}{$website->getType()->getScriptCreate()} && {$website->getType()->getPath()}{$website->getType()->getScriptCreate()} {$website->getType()->getPath()} {$website->getServerName()} {$website->getNameFolder()}";            
+        $cnx = ssh2_connect("147.135.162.109",22);
+        ssh2_auth_password($cnx,"interface","9w4hZ9Ke7D");
+        $stream = ssh2_exec($cnx, $command);
+        stream_set_blocking($stream,true);
+        
     }
 
     public function deleteWebsite(Website $website){
@@ -46,5 +46,4 @@ class WebsiteService
         stream_set_blocking($stream, true);
         
     }
-
 }

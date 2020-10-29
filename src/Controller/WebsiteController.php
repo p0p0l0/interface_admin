@@ -108,10 +108,9 @@ class WebsiteController extends AbstractController
             );
             return $this->redirectToRoute('website_list');
         }
-        $websites = $wr->findAll();
+        
         $verifCustomer = $website->getCustomer();
         $verifType = $website->getType();
-        $nameFolder = $website->getNameFolder();
 
         $form = $this->createForm(WebsiteType::class, $website);
         $form->handleRequest($request);
@@ -140,7 +139,7 @@ class WebsiteController extends AbstractController
 
             $em->flush();
 
-            $ws->createWebsite($website);
+            $ws->updateWebsite($website);
 
             $this->addFlash(
                 "success",
@@ -164,10 +163,11 @@ class WebsiteController extends AbstractController
         $websiteId,
         TranslatorInterface $translator,
         WebsiteService $ws
-    ) {
+    )
+    {
 
         $website = $wr->find($websiteId);
-        $nameFolder = $website->getNameFolder();
+    
         if (!$website) {
             $this->addFlash(
                 "warning",
@@ -179,8 +179,8 @@ class WebsiteController extends AbstractController
         $em->remove($website);
         $em->flush();
 
-        $ws->createWebsite($website);
-       
+        $ws->deleteWebsite($website);
+
         $this->addFlash(
             "success",
             $website->getServerName() . $translator->trans(" deleted successfully")
