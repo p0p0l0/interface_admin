@@ -180,12 +180,13 @@ class WebsiteController extends AbstractController
         $em->flush();
 
         $ws->deleteWebsite($website);
-
+        
         $this->addFlash(
             "success",
             $website->getServerName() . $translator->trans(" deleted successfully")
         );
 
         return $this->redirectToRoute('website_list');
+   
     }
 }

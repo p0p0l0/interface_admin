@@ -14,8 +14,8 @@ class CustomerFixtures extends Fixture
 
         $customer->setName('adrien')
                  ->setMail('adrien@winmedia.org')
-                 ->setStatus('Production')
-                 ->setUserCreation('admin');
+                 ->setStatus('Production');
+                 
         $manager->persist($customer);
         $manager->flush();
     }
