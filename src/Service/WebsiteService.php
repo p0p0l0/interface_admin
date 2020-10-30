@@ -27,9 +27,9 @@ class WebsiteService
         
     }
 
-    public function updateWebsite(Website $website){
+    public function updateWebsite(Website $website, $nameFolderBefore){
 
-        $command = "sudo chmod +x {$website->getType()->getPath()}{$website->getType()->getScriptUpdate()} && {$website->getType()->getPath()}{$website->getType()->getScriptUpdate()} {$website->getType()->getPath()} {$website->getServerName()} {$website->getNameFolder()}";
+        $command = "sudo chmod +x {$website->getType()->getPath()}{$website->getType()->getScriptUpdate()} && {$website->getType()->getPath()}{$website->getType()->getScriptUpdate()} {$website->getType()->getPath()} {$nameFolderBefore}  {$website->getServerName()} {$website->getNameFolder()} ";
         $cnx = ssh2_connect("147.135.162.109",22);
         ssh2_auth_password($cnx,"interface","9w4hZ9Ke7D");
         $stream = ssh2_exec($cnx, $command);
@@ -39,11 +39,12 @@ class WebsiteService
 
     public function majWebsite(Website $website){
 
-        $command = "sudo chmod +x {$website->getType()->getPath()}{$website->getType()->getScriptMaj()} && {$website->getType()->getPath()}{$website->getType()->getScriptMaj()} {$website->getType()->getPath()} {$website->getServerName()} {$website->getNameFolder()}";
+        $command = "sudo chmod +x {$website->getType()->getPath()}{$website->getType()->getScriptMaj()} && {$website->getType()->getPath()}{$website->getType()->getScriptMaj()} {$website->getType()->getPath()} {$website->getNameFolder()}";
         $cnx = ssh2_connect("147.135.162.109",22);
         ssh2_auth_password($cnx,"interface","9w4hZ9Ke7D");
         $stream = ssh2_exec($cnx, $command);
         stream_set_blocking($stream, true);
         
     }
+
 }

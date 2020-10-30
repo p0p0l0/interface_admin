@@ -77,7 +77,9 @@ class WebsiteController extends AbstractController
                 $website->getServerName() . $translator->trans(" added successfully")
             );
 
-            return $this->redirectToRoute('website_list');
+            return $this->redirectToRoute('website_update',[
+                'websiteId'=>$website->getId()
+            ]);
         }
 
         return $this->render('website/create.html.twig', [
@@ -108,7 +110,7 @@ class WebsiteController extends AbstractController
             );
             return $this->redirectToRoute('website_list');
         }
-        
+        $nameFolderBefore = $website->getNameFolder();
         $verifCustomer = $website->getCustomer();
         $verifType = $website->getType();
 
@@ -139,18 +141,21 @@ class WebsiteController extends AbstractController
 
             $em->flush();
 
-            $ws->updateWebsite($website);
+            $ws->updateWebsite($website,$nameFolderBefore);
 
             $this->addFlash(
                 "success",
                 $website->getServerName() . $translator->trans(" edited succesfully")
             );
 
-            return $this->redirectToRoute('website_list');
+            return $this->redirectToRoute('website_update',[
+                'websiteId'=>$websiteId
+            ]);
         }
 
         return $this->render('website/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'website'=>$website
         ]);
     }
 
@@ -176,6 +181,14 @@ class WebsiteController extends AbstractController
             return $this->redirectToRoute('website_list');
         }
 
+        /*if ($website->getStatus()=='Inactive') {
+            $this->addFlash(
+                "warning",
+                $translator->trans("The website is not yet active")
+            );
+            return $this->redirectToRoute('website_list');
+        }*/
+
         $em->remove($website);
         $em->flush();
 
@@ -188,5 +201,38 @@ class WebsiteController extends AbstractController
 
         return $this->redirectToRoute('website_list');
    
+    }
+
+    /**
+     * @Route("/{websiteId}/maj", name="maj", requirements = {"websiteId"="\d+"})
+     */
+    public function maj(EntityManagerInterface $em,
+                        WebsiteRepository $wr,
+                        $websiteId,
+                        TranslatorInterface $translator,
+                        WebsiteService $ws)
+    {
+
+        $website = $wr->find($websiteId);
+
+        if (!$website) {
+            $this->addFlash(
+                "warning",
+                $translator->trans("The website doesn't exist")
+            );
+            return $this->redirectToRoute('website_list');
+        }
+
+        $ws->majWebsite($website);
+
+        $this->addFlash(
+            "success",
+            $website->getServerName() . $translator->trans(" maj successfully")
+        );
+
+        return $this->redirectToRoute('website_update',[
+            'websiteId'=>$websiteId
+        ]);
+
     }
 }

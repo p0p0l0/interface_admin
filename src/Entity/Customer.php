@@ -26,6 +26,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[a-zA-Z0-9\-\_]+$/")
      */
     private $name;
 
@@ -37,6 +38,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Regex("/^[0-9\-\_\ \.]+$/")
      */
     private $phone;
 

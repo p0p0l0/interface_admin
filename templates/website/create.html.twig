@@ -16,5 +16,11 @@
     <div class="col-10 mt-2">
         {{ form_start(form)}}
         {{ form_end(form)}}
+        {% if website is defined %}
+        <a href=" {{path('website_maj',{'websiteId':website.id})}}">
+            <button type="button" class="btn btn-success">Maj</button>
+        </a>
+        {% endif %}
+        
     </div>
 {% endblock %}

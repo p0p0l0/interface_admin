@@ -24,11 +24,13 @@ class Website
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[a-zA-Z0-9\-\_]+$/")
      */
     private $serverName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[a-zA-Z0-9\-\_\.]+$/")
      */
     private $nameFolder;
 
@@ -41,12 +43,6 @@ class Website
      * @ORM\ManyToOne(targetEntity=Type::class)
      */
     private $type;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $status ='Active';
-
 
     public function getId(): ?int
     {
@@ -99,18 +95,6 @@ class Website
     public function setType(?Type $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }

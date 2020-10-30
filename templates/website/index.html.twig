@@ -23,7 +23,6 @@
                     <th scope="col">{% trans %}Customer{% endtrans %}</th>
                     <th scope="col">{% trans %}Server name{% endtrans %}</th>
                     <th scope="col">{% trans %}Folder name{% endtrans %}</th>
-                    <th scope="col">{% trans %}Status{% endtrans %}</th>
                     <th scope="col">Actions</th>
                    
                 </tr>
@@ -36,7 +35,6 @@
                         <td>{{website.customer.name}}</td>
                         <td>{{website.serverName}}</td>
                         <td>{{website.NameFolder}}</td>
-                        <td>{{website.status}}</td>
                        <td>
                             <a href="{{ path('website_update',{'websiteId':website.id}) }}">
                                 <button type="button" class="btn btn-outline-primary">

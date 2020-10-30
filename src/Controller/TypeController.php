@@ -45,7 +45,7 @@ class TypeController extends AbstractController
                 $type->getName() . $translator->trans(" added successfully ")
             );
 
-            return $this->redirectToRoute('type_create', [
+            return $this->redirectToRoute('type_update', [
                 'typeId' => $type->getId()
             ]);
         }
@@ -83,7 +83,7 @@ class TypeController extends AbstractController
                 $type->getName() . $translator->trans(" edited successfully")
             );
 
-            return $this->redirectToRoute('type_create', [
+            return $this->redirectToRoute('type_update', [
                 'typeId' => $typeId
             ]);
         }

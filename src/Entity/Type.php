@@ -24,27 +24,32 @@ class Type
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[a-zA-Z0-9\-\_]+$/")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Ip
+     * @Assert\Regex("/^[0-9\.]+$/")
      */
     private $IpServer;
     
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Regex("/^[0-9]+$/")
      */
     private $port = 22;
      
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[a-zA-Z0-9\-\_]+$/")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[a-zA-Z0-9\-\_]+$/")
      */
     private $password;
 
@@ -55,6 +60,7 @@ class Type
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[a-zA-Z0-9\-\_]+$/")
      */
     private $serverName;
 
@@ -214,36 +220,18 @@ class Type
         return $this;
     }
 
+
     /**
      * @ORM\PrePersist
      */
-    public function setScriptCreateValue()
+    public function prePersistScriptValue()
     {
         $this->scriptCreate = "install-".mb_strtolower($this->getName()).".sh";
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setScriptUpdateValue()
-    {
         $this->scriptUpdate = "update-".mb_strtolower($this->getName()).".sh";
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setScriptMajValue()
-    {
         $this->scriptMaj = "maj-".mb_strtolower($this->getName()).".sh";
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setScriptDeleteValue()
-    {
         $this->scriptDelete = "delete-".mb_strtolower($this->getName()).".sh";
     }
+
+
 
 }

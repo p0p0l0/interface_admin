@@ -39,14 +39,6 @@ class WebsiteType extends AbstractType
             ->add('serverName', TextType::class,[
                 'label'=>'Server name'
             ])
-            
-            ->add('status', ChoiceType::class,[
-                'label'=>'Status',
-                'choices'=>[$this->translator->trans('Active')=>$this->translator->trans('Active'),
-                            $this->translator->trans('Inactive')=>$this->translator->trans('Inactive')],
-                'expanded'=> true,
-                'label_attr'=>['class'=>'radio-inline']
-            ])
 
             ->add('Submit', SubmitType::class)
         ;

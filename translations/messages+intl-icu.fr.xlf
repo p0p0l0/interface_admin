@@ -301,6 +301,14 @@
         <source>Are you sure you want to delete the website</source>
         <target>Etes vous sur de vouloir supprimer le site web</target>
       </trans-unit>
+      <trans-unit id="CoR.4sv" resname="The website is not yet active">
+        <source>The website is not yet active</source>
+        <target>Le site web n'est pas encore actif</target>
+      </trans-unit>
+      <trans-unit id="QvTah8j" resname=" maj successfully">
+        <source> maj successfully</source>
+        <target> maj avec succès</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
