@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class SetUserEditValue
 {
+    // comme setUSerCreation mais por l'user qui a édité le customer
     private $tokenStorage;
 
     public function __construct(TokenStorageInterface $tokenStorage)

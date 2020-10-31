@@ -12,8 +12,8 @@ class CustomerFixtures extends Fixture
     {
         $customer = new Customer();
 
-        $customer->setName('adrien')
-                 ->setMail('adrien@winmedia.org')
+        $customer->setName('thierry')
+                 ->setMail('thierry@test.org')
                  ->setStatus('Production');
                  
         $manager->persist($customer);

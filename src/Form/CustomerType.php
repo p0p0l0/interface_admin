@@ -30,7 +30,7 @@ class CustomerType extends AbstractType
                             $this->translator->trans('Training')=>$this->translator->trans('Training'),
                             'Production'=>'Production',
                             $this->translator->trans('Closed')=>$this->translator->trans('Closed')],
-                'expanded'=> true,
+                'expanded'=> true, //bouton radio
                 'label_attr'=>[
                     'class'=>'radio-inline'
                 ]

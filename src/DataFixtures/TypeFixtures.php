@@ -13,22 +13,22 @@ class TypeFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
        $typeWinSales = new Type();
-       $typeWinSales->setName('WinSales')
-                    ->setIpServer('147.135.162.109')
+       $typeWinSales->setName('TypeTest1')
+                    ->setIpServer('147.123.123.123')
                     ->setUsername('interface')
-                    ->setPassword('9w4hZ9Ke7D')
+                    ->setPassword('password')
                     ->setPath('/home/interface/www/')
-                    ->setServerName('winsales.biz')
+                    ->setServerName('typetest1.org')
                     ;
         $manager->persist($typeWinSales);
 
         $typeWinMam = new Type();
-        $typeWinMam->setName('WinMam')
-                ->setIpServer('147.135.162.108')
+        $typeWinMam->setName('TypeTest2')
+                ->setIpServer('147.131.131.131')
                 ->setUsername('interface')
-                ->setPassword('9w4hZ9Ke7D')
-                ->setPath('/var/www/WinMam')
-                ->setServerName('winmam.cloud')
+                ->setPassword('password')
+                ->setPath('/var/www/typetest2')
+                ->setServerName('typetest2.cloud')
                 ;
         $manager->persist($typeWinMam);
 

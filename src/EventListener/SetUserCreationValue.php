@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class SetUserCreationValue
 {
+    // fonction qui recupere le token de connexion
     private $tokenStorage;
 
     public function __construct(TokenStorageInterface $tokenStorage)
@@ -15,6 +16,7 @@ class SetUserCreationValue
         $this->tokenStorage = $tokenStorage;
     }
 
+    // fonction permtant de  prepersist le créateur directement a partir de l'use qui s'est connecté
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity =$args->getEntity();
